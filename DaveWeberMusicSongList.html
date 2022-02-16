@@ -33,15 +33,15 @@
 <body>
     <div style="overflow:auto">
         <img style="float:left" src="DaveWeberMusicSocialMediaRedSquare.jpg" height="50px">
-        <h1 style="float: left; margin-left: 10px;">Dave Weber Music Song List 3</h1>
+        <h1 style="float: left; margin-left: 10px;">Dave Weber Music Song List 4</h1>
     </div>
 
     <p>Select Dave's singing partner or choose <em>Solo</em>:</p>
-    <label><input type="radio" id="radSinger" name="radSinger" value="B">Bailey</label>
-    <label><input type="radio" id="radSinger" name="radSinger" value="R">Rebecca</label>
-    <label><input type="radio" id="radSinger" name="radSinger" value="L">Lauren</label>
-    <label><input type="radio" id="radSinger" name="radSinger" value="N">Daniela</label>
-    <label><input type="radio" id="radSinger" name="radSinger" value="D"><em>Solo</em></label> <br /><br />
+    <label><input type="radio" name="radSinger" value="B">Bailey</label>
+    <label><input type="radio" name="radSinger" value="R">Rebecca</label>
+    <label><input type="radio" name="radSinger" value="L">Lauren</label>
+    <label><input type="radio" name="radSinger" value="N">Daniela</label>
+    <label><input type="radio" name="radSinger" value="D"><em>Solo</em></label> <br /><br />
     
     <div style="padding-left: 80px">
         <a id="aShowAll" href="javascript:;">Not sure? Show everything</a>
@@ -354,7 +354,7 @@
 		
             $('#aShowAll').click(function() {
 		console.log("clearing");
-		$("#radSinger").prop("checked", false);
+		$('input[type=radio][name=radSinger]').prop("checked", false);
 		console.log("cleared");
                 populateSongList(null);
 		console.log("populated");
