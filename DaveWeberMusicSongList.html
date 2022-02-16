@@ -343,17 +343,18 @@
 
         $(function() {
 
-            $("#selSinger").change(function() {
-                let singerTag = $("#selSinger").val();
-                populateSongList(singerTag);
-            });
-
             $('input[type=radio][name=radSinger]').change(function() {
-                let singerTag = this.value;
-                populateSongList(singerTag);
+		console.log("change");
+		if (this.value) {
+		    console.log(this.value);
+		    let singerTag = this.value;
+		    populateSongList(singerTag);
+		}
             });
 		
             $('#aShowAll').click(function() {
+		console.log("clearing");
+		$("#radSinger).prop("checked", false);
                 populateSongList(null);
             });
 
