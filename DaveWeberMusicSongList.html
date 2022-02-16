@@ -33,7 +33,7 @@
 <body>
     <div style="overflow:auto">
         <img style="float:left" src="DaveWeberMusicSocialMediaRedSquare.jpg" height="50px">
-        <h1 style="float: left; margin-left: 10px;">Dave Weber Music Song List 5</h1>
+        <h1 style="float: left; margin-left: 10px;">Dave Weber Music Song List</h1>
     </div>
 
     <p>Select Dave's singing partner or choose <em>Solo</em>:</p>
@@ -344,20 +344,15 @@
         $(function() {
 
             $('input[type=radio][name=radSinger]').change(function() {
-		console.log("change");
 		if (this.value) {
-		    console.log(this.value);
 		    let singerTag = this.value;
 		    populateSongList(singerTag);
 		}
             });
 		
             $('#aShowAll').click(function() {
-		console.log("clearing");
 		$('input[type=radio][name=radSinger]').prop("checked", false);
-		console.log("cleared");
                 populateSongList(null);
-		console.log("populated");
             });
 
         });
