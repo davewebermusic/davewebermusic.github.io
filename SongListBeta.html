@@ -55,7 +55,7 @@
 
     </ol>
 
-    <div id="divDecade" style="padding-top: 10px; padding-left: 10px;">
+    <div id="divDecade" style="display:none; padding-top: 10px; padding-left: 10px;">
 	    <label>Filter by decade:</label>
 	    <select id="selDecade">
 		    <option value="">All decades</option>
@@ -385,6 +385,8 @@
 		if (this.value) {
 		    let decade = this.value;
 		    alert("Decade " + decade);
+		    let singerTag = $("[type=radio][name=radSinger]:checked").val()
+		    alert("Singer " + singerTag);
 		    // populateSongList(singerTag);
 		}
             });
