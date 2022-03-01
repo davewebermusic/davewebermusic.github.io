@@ -51,10 +51,14 @@
 
     <p id="pRequestInstruction" style="display:none;">Click on the song you wish to request via email.</p>
 
-	<span>4</span>
+	<span>5</span>
 	
-    <div id="divDecade" style="display:none;">
-	    <span>Filter by decade:</span>
+    <ol id="ulSongs">
+
+    </ol>
+
+    <div style="margin-top:10px; padding-left:10px">
+	    <span id="spanDecade">Filter by decade:</span>
 	    <select id="selDecade">
 		    <option value="">All decades</option>
 		    <option value="2020">2020s</option>
@@ -70,10 +74,6 @@
 	    </select>
     </div>
 	
-    <ol id="ulSongs">
-
-    </ol>
-
     <script>
 
         var songs = [
@@ -415,7 +415,8 @@
                 }
             });
             $("#pRequestInstruction").show();
-	    $("#divDecade").show();
+	    $("#spanDecade").show();
+	    $("#selDecade").show();
         }
 
         function arrayContains(arr, val) {
