@@ -379,7 +379,7 @@
 
             $('input[type=radio][name=radSinger]').change(function() {
 		if (this.value) {
-		    $("#selDecade").value("");
+		    $("#selDecade").val("");
 		    let singerTag = this.value;
 		    populateSongList(singerTag);
 		}
@@ -387,7 +387,7 @@
 		
             $('#aShowAll').click(function() {
 		$('input[type=radio][name=radSinger]').prop("checked", false);
-	        $("#selDecade").value("");
+	        $("#selDecade").val("");
                 populateSongList(null);
             });
 
