@@ -56,8 +56,6 @@
     </div>
 
     <p id="pRequestInstruction" style="display:none;">Click on the song you wish to request via email.</p>
-
-	<span>9</span>
 	
     <ol id="ulSongs">
 
@@ -392,11 +390,9 @@
             });
 
 	    $('#selDecade').change(function() {
-		if (this.value) {
 		    let decade = this.value;
 		    let singerTag = $("[type=radio][name=radSinger]:checked").val()
 		    populateSongList(singerTag, decade);
-		}
             });
         });
 
