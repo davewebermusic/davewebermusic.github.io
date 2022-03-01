@@ -17,6 +17,12 @@
         p {
             font-size: 16px;
         }
+	span {
+	    font-size: 16px;
+	}
+	option {
+            font-size: 16px;
+	}
         li {
             font-size: 16px;
         }
@@ -51,13 +57,13 @@
 
     <p id="pRequestInstruction" style="display:none;">Click on the song you wish to request via email.</p>
 
-	<span>5</span>
+	<span>7</span>
 	
     <ol id="ulSongs">
 
     </ol>
 
-    <div style="margin-top:10px; padding-left:10px">
+    <div style="margin-top: 10px">
 	    <span id="spanDecade">Filter by decade:</span>
 	    <select id="selDecade">
 		    <option value="">All decades</option>
@@ -373,6 +379,7 @@
 
             $('input[type=radio][name=radSinger]').change(function() {
 		if (this.value) {
+		    $("#selDecade").value("");
 		    let singerTag = this.value;
 		    populateSongList(singerTag);
 		}
@@ -380,6 +387,7 @@
 		
             $('#aShowAll').click(function() {
 		$('input[type=radio][name=radSinger]').prop("checked", false);
+	        $("#selDecade").value("");
                 populateSongList(null);
             });
 
