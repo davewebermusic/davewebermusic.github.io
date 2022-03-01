@@ -380,6 +380,13 @@
                 populateSongList(null);
             });
 
+	    $('selDecade').change(function() {
+		if (this.value) {
+		    let decade = this.value;
+		    alert("Decade " + decade);
+		    // populateSongList(singerTag);
+		}
+            });
         });
 
         function populateSongList(tag) {
