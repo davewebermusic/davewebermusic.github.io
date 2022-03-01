@@ -44,8 +44,18 @@
 	    <label><input type="radio" name="radSinger" value="N">Daniela</label>
 	    <label><input type="radio" name="radSinger" value="D"><em>Solo</em></label>
     </div>
-    
-    <div style="padding-left: 10px; padding-bottom: 10px"">
+	
+    <div style="padding-left: 80px">
+        <a id="aShowAll" href="javascript:;">Not sure? Show everything</a>
+    </div>
+
+    <p id="pRequestInstruction" style="display:none;">Click on the song you wish to request via email.</p>
+
+    <ol id="ulSongs">
+
+    </ol>
+
+    <div style="padding-top: 10px; padding-left: 10px; padding-bottom: 10px"">
 	    <select id="selDecade">
 		    <option value="">All decades</option>
 		    <option value="2020">2020s</option>
@@ -60,17 +70,7 @@
 		    <option value="1930">1930s</option>
 	    </select>
     </div>
-		
-    <div style="padding-left: 80px">
-        <a id="aShowAll" href="javascript:;">Not sure? Show everything</a>
-    </div>
-
-    <p id="pRequestInstruction" style="display:none;">Click on the song you wish to request via email.</p>
-
-    <ol id="ulSongs">
-
-    </ol>
-
+	
     <script>
 
         var songs = [
