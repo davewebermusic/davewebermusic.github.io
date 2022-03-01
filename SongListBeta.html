@@ -36,7 +36,7 @@
         <h1 style="float: left; margin-left: 10px;">Dave Weber Music Song List</h1>
     </div>
 
-    <div style="padding-bottom: 10px">
+    <div id="divDecade" style="padding-bottom: 10px">
 	    <p>Select Dave's singing partner or choose <em>Solo</em>:</p>
 	    <label><input type="radio" name="radSinger" value="B">Bailey</label>
 	    <label><input type="radio" name="radSinger" value="R">Rebecca</label>
@@ -55,7 +55,7 @@
 
     </ol>
 
-    <div style="padding-top: 10px; padding-left: 10px; padding-bottom: 10px"">
+    <div id="divDecade" style="display:none; padding-top: 10px; padding-left: 10px;">
 	    <select id="selDecade">
 		    <option value="">All decades</option>
 		    <option value="2020">2020s</option>
@@ -403,6 +403,7 @@
                 }
             });
             $("#pRequestInstruction").show();
+	    $("#divDecade").show();
         }
 
         function arrayContains(arr, val) {
