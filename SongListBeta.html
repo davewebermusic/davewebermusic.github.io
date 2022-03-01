@@ -381,28 +381,26 @@
 		if (this.value) {
 		    $("#selDecade").val("");
 		    let singerTag = this.value;
-		    populateSongList(singerTag);
+		    populateSongList(singerTag, null);
 		}
             });
 		
             $('#aShowAll').click(function() {
 		$('input[type=radio][name=radSinger]').prop("checked", false);
 	        $("#selDecade").val("");
-                populateSongList(null);
+                populateSongList(null, null);
             });
 
 	    $('#selDecade').change(function() {
 		if (this.value) {
 		    let decade = this.value;
-		    alert("Decade " + decade);
 		    let singerTag = $("[type=radio][name=radSinger]:checked").val()
-		    alert("Singer " + singerTag);
-		    // populateSongList(singerTag);
+		    populateSongList(singerTag, decade);
 		}
             });
         });
 
-        function populateSongList(tag) {
+        function populateSongList(tag, decade) {
             
             $("#ulSongs").empty();
 
@@ -411,14 +409,19 @@
                 let artist = songs[index].artist;
                 let tagsCsv = songs[index].tags;
                 let tags = tagsCsv.split(',');
+		let songDecade = songs[index].decade;
 
                 let titleAnchorTag = "<a href='mailto:DaveWeberMusic@gmail.com?subject=Song request: " + encodeURIComponent(title).replace(/'/g, "%27") + "&body=Please play " + encodeURIComponent(title).replace(/'/g, "%27") + " by " + encodeURIComponent(artist).replace(/'/g, "%27") + ".'>" + title + "</a>";
 
                 if (! tag) {
-                    $("#ulSongs").append("<li>" + titleAnchorTag +  " -- <em>" + artist + "</em></li>");
+		    if ((! decade) || (decade == songDecade)) {
+                        $("#ulSongs").append("<li>" + titleAnchorTag +  " -- <em>" + artist + "</em></li>");
+		    } 
                 } else {
                     if (arrayContains(tags, "D") || (arrayContains(tags, tag))) {
-                        $("#ulSongs").append("<li>" + titleAnchorTag +  " -- <em>" + artist + "</em></li>");
+			if ((! decade) || (decade == songDecade)) {
+                            $("#ulSongs").append("<li>" + titleAnchorTag +  " -- <em>" + artist + "</em></li>");
+			}
                     }
                 }
             });
