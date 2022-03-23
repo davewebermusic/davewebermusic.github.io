@@ -25,6 +25,10 @@
             font-size: 14px;
         }
 
+        .select-singer {
+            font-size: 15px;
+        }
+
         .not-sure {
             font-size: 15px;
         }
@@ -54,7 +58,7 @@
 
     <div class="singer" style="padding-bottom: 10px">
         <div style="margin: 10px 0 5px 0">
-            <span>Select Dave's singing partner or choose <em>Solo</em>:</span>
+            <span class="select-singer">Select Dave's singing partner or choose <em>Solo</em>:</span>
         </div>
 
         <label><input type="radio" name="radSinger" value="B">Bailey</label>
@@ -181,7 +185,7 @@
             { title: "Free Fallin'", artist: "Tom Petty", tags: 'D', decade: "1980" },
             { title: "Friday I'm in Love", artist: "The Cure", tags: 'D,B,L', decade: "1990" },
             { title: "From this Valley", artist: "Civil Wars", tags: 'L,R', decade: "2010" },
-            { title: "Games People Play", artist: "Spinners", tags: 'D,R', decade: "1970" },
+            { title: "Games People Play", artist: "The Spinners", tags: 'D,R', decade: "1970" },
             { title: "Georgia on My Mind", artist: "Ray Charles", tags: 'D', decade: "1960" },
             { title: "Girl Crush", artist: "Little Big Town", tags: 'B,N', decade: "2010" },
             { title: "Give a Little Bit", artist: "Supertramp", tags: 'B', decade: "1970" },
@@ -199,7 +203,7 @@
             { title: "Heather", artist: "Conan Gray", tags: 'B', decade: "2020" },
             { title: "Hello It's Me", artist: "Todd Rundgren", tags: 'D,R', decade: "1970" },
             { title: "Hey Soul Sister", artist: "Train", tags: 'B,L,R', decade: "2000" },
-            { title: "Ho Hey", artist: "Lumineers", tags: 'B,L,R', decade: "2010" },
+            { title: "Ho Hey", artist: "The Lumineers", tags: 'B,L,R', decade: "2010" },
             { title: "Home", artist: "Phillip Phillips", tags: 'B,D,R', decade: "2000" },
             { title: "Hopelessly Devoted to You", artist: "Grease", tags: 'B', decade: "1970" },
             { title: "How Deep is Your Love", artist: "The Bee Gees", tags: 'L,R', decade: "1970" },
@@ -218,8 +222,8 @@
             { title: "IDK You Yet", artist: "Alexander 23", tags: 'B', decade: "2020" },
             { title: "If I Ain't Got You", artist: "Alicia Keys", tags: 'B,R,N', decade: "2000" },
             { title: "If You Don't Know Me by Now", artist: "Melvin Gordon (Stan Taylor arr.)", tags: 'B', decade: "1970" },
-            { title: "I'll be Around", artist: "Spininers", tags: 'D,N,L,R', decade: "1970" },
-            { title: "I'll be There", artist: "Jackson Five (Mariah Carey arr.)", tags: 'B,L,N', decade: "1970" },
+            { title: "I'll be Around", artist: "The Spinners", tags: 'D,N,L,R', decade: "1970" },
+            { title: "I'll be There", artist: "Jackson 5 (Mariah Carey arr.)", tags: 'B,L,N', decade: "1970" },
             { title: "I'll be There for You (Friends theme)", artist: "The Rembrandts", tags: 'B', decade: "1990" },
             { title: "I'm Eighteen", artist: "Alice Cooper", tags: 'D', decade: "1970" },
             { title: "I'm Gonna Be (500 Miles)", artist: "The Proclaimers", tags: 'B,N,R', decade: "1990" },
@@ -238,7 +242,7 @@
             { title: "Killing Me Softly", artist: "Roberta Flack", tags: 'R,L,N', decade: "1970" },
             { title: "Kiss Me", artist: "Sixpense None the Richer", tags: 'B,N,R', decade: "1990" },
             { title: "Landslide", artist: "Fleetwood Mac", tags: 'B,R', decade: "1970" },
-            { title: "Let It Be", artist: "Beatles", tags: 'B,L,R', decade: "1970" },
+            { title: "Let It Be", artist: "The Beatles", tags: 'B,L,R', decade: "1970" },
             { title: "Let's Stay Together", artist: "Al Green", tags: 'D,R', decade: "1970" },
             { title: "Life is a Highway", artist: "Tom Cochrane / Rascal Flatts", tags: 'B,L', decade: "1990" },
             { title: "Lights", artist: "Journey", tags: 'B,L', decade: "1970" },
@@ -265,10 +269,10 @@
             { title: "Mary Jane's Last Dance", artist: "Tom Petty", tags: 'D', decade: "1990" },
             { title: "Me and Bobby McGee", artist: "Janis Joplin", tags: 'B,L', decade: "1970" },
             { title: "Meant To Be", artist: "Bebe Rexha and Florida Georgia Line", tags: 'D,R', decade: "2010" },
-            { title: "Melissa", artist: "Alman Brothers", tags: 'D,R', decade: "1970" },
+            { title: "Melissa", artist: "The Allman Brothers Band", tags: 'D,R', decade: "1970" },
             { title: "Missing You", artist: "All Time Low", tags: 'B,D', decade: "2010" },
             { title: "More Hearts Than Mine", artist: "Ingrid Andress", tags: 'B', decade: "2010" },
-            { title: "More Today Than Yesterday", artist: "The Spiral Staircase", tags: 'B,D', decade: "1960" },
+            { title: "More Today Than Yesterday", artist: "Spiral Starecase", tags: 'B,D', decade: "1960" },
             { title: "My Cherie Amour", artist: "Stevie Wonder", tags: 'A', decade: "1960" },
             { title: "My Church", artist: "Maren Morris", tags: 'B,N', decade: "2010" },
             { title: "My Girl", artist: "The Temptations", tags: 'B,D,L,N,R', decade: "1960" },
@@ -283,12 +287,11 @@
             { title: "Night Changes", artist: "One Direction", tags: 'B', decade: "2010" },
             { title: "Nothing", artist: "Bruno Major", tags: 'B', decade: "2020" },
             { title: "Nowhere to Run", artist: "Martha Reeves and the Vandellas", tags: 'R', decade: "1960" },
-            { title: "Ob-La-Di, Ob-La-Da", artist: "Beatles", tags: 'R', decade: "1960" },
+            { title: "Ob-La-Di, Ob-La-Da", artist: "The Beatles", tags: 'R', decade: "1960" },
             { title: "One Hand in My Pocket", artist: "Alanis Morissette", tags: 'L,R', decade: "1990" },
             { title: "One Man Band", artist: "Old Dominion", tags: 'B,D', decade: "2010" },
             { title: "Ooh Baby Baby", artist: "Smokey Robinson", tags: 'D,R', decade: "1960" },
             { title: "Ordinary World", artist: "Duran Duran", tags: 'D', decade: "1980" },
-            { title: "Out Here on my Own", artist: "Fame", tags: 'A', decade: "1980" },
             { title: "Peace Bomb", artist: "Eric Scott", tags: 'D', decade: "2020" },
             { title: "Peace of Mind", artist: "Boston", tags: 'B', decade: "1970" },
             { title: "Peaceful Easy Feeling", artist: "Eagles", tags: 'D', decade: "1970" },
@@ -324,7 +327,7 @@
             { title: "Sola", artist: "Jessie Reyez", tags: 'A', decade: "2010" },
             { title: "Somebody Like You", artist: "Keith Urban", tags: 'D,L,R', decade: "2000" },
             { title: "Somebody To Love", artist: "Queen", tags: 'B', decade: "1970" },
-            { title: "Something", artist: "Beatles", tags: 'D', decade: "1960" },
+            { title: "Something", artist: "The Beatles", tags: 'D', decade: "1960" },
             { title: "Something Just Like This", artist: "The Chainsmokers and Coldplay", tags: 'B,R', decade: "2010" },
             { title: "Somewhere Only We Know", artist: "Keane", tags: 'B,L,R', decade: "2000" },
             { title: "Somewhere Over the Rainbow", artist: "Ariana Grande arr.", tags: 'A', decade: "Old" },
@@ -380,7 +383,7 @@
             { title: "Wildflowers", artist: "Tom Petty", tags: 'D', decade: "1990" },
             { title: "Will You Still Love Me Tomorrow", artist: "Carole King / The Shirelles", tags: 'B,L,N,R', decade: "1960" },
             { title: "Wonderful Tonight", artist: "Eric Clapton", tags: 'D', decade: "1970" },
-            { title: "Wonderful World", artist: "Cam Cooke", tags: 'B,R', decade: "1960" },
+            { title: "Wonderful World", artist: "Sam Cooke", tags: 'B,R', decade: "1960" },
             { title: "Wonderwall", artist: "Oasis", tags: 'D', decade: "1990" },
             { title: "Yellow", artist: "Coldplay", tags: 'B,R,N', decade: "2000" },
             { title: "Yes, I'm Ready", artist: "Barbara Mason", tags: 'D', decade: "1960" },
@@ -436,9 +439,9 @@
 
             let byTitle = $("#chkByTitle").prop("checked");
             if (!byTitle) {
-                songs.sort((a, b) => (a.artist > b.artist) ? 1 : -1)
+                songs.sort((a, b) => (toSortStr(a.artist) + '  ' + toSortStr(a.title) > toSortStr(b.artist) + '  ' + toSortStr(b.title)) ? 1 : -1)
             } else {
-                songs.sort((a, b) => (a.title > b.title) ? 1 : -1)
+                songs.sort((a, b) => (toSortStr(a.title) + '  ' + toSortStr(a.artist) > toSortStr(b.title) + '  ' + toSortStr(b.artist)) ? 1 : -1)
             }
 
             songs.forEach((num, index) => {
@@ -483,6 +486,16 @@
                 }
             }
             return false;
+        }
+
+        function toSortStr(str) {
+            if (str.startsWith("The ")) {
+                return str.substring(4);
+            }
+            if (str.startsWith("A ")) {
+                return str.substring(2);
+            }
+            return str;
         }
 
     </script>
