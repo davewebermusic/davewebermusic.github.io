@@ -53,14 +53,17 @@
             if (userAgent.indexOf("android") >= 0) {
                 // Android            
                 url = "intent://paycharge?txn=pay&recipients=DaveWeberMusic#Intent;package=com.venmo;scheme=venmo;end";
+		$("#pAutoAndroid").show();
 		    
             } else if (userAgent.indexOf("iphone") >= 0 || userAgent.indexOf("ipad") >=  0 || userAgent.indexOf("ios") >= 0 || userAgent.indexOf("macintosh") >= 0) {
                 // IOS - works for Safari or Chrome
                 url = "venmo://paycharge?txn=pay&recipients=DaveWeberMusic";
-
+		$("#pAuto").show();
+		    
             } else {
                 // Computer         
                 url = "https://www.venmo.com/DaveWeberMusic";
+		$("#pAuto").show();
             }
         
             // Set where the button/link goes
