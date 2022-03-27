@@ -30,11 +30,13 @@
     </div>
     
     <div style="padding-left: 70px">
-	    <a href="http://davewebermusic.com">Back to davewebermusic.com</a>
+	<a href="http://davewebermusic.com">Back to davewebermusic.com</a>
     </div>
 
-    <p>We will automatically launch Venmo in a few seconds or you may click the <em>Continue with Venmo</em> button below.</p>
+    <p id="pAuto" style="display:none;">We will automatically launch Venmo in a few seconds or you may click the <strong>ontinue with Venmo</strong> button below.</p>
 
+    <p id="pAutoAndroid" style="display:none;">Click the <strong>Continue with Venmo</strong> button below to launch Vemo.</p>
+	
     <p>You may be asked to enter the last 4 digits of Dave's phone #.</p>
 	
     <p style="margin-left:40px">Dave's last 4 digits: <strong>8631</strong></p>
@@ -51,25 +53,28 @@
             if (userAgent.indexOf("android") >= 0) {
                 // Android            
                 url = "intent://paycharge?txn=pay&recipients=DaveWeberMusic#Intent;package=com.venmo;scheme=venmo;end";
-
+		$("pAutoAndroid").show();
+		    
             } else if (userAgent.indexOf("iphone") >= 0 || userAgent.indexOf("ipad") >=  0 || userAgent.indexOf("ios") >= 0 || userAgent.indexOf("macintosh") >= 0) {
                 // IOS - works for Safari or Chrome
                 url = "venmo://paycharge?txn=pay&recipients=DaveWeberMusic";
+		$("pAuto").show();
 
             } else {
                 // Computer         
                 url = "https://www.venmo.com/DaveWeberMusic";
+	        $("pAuto").show();
             }
         
-            // Set where the link goes
+            // Set where the button/link goes
             $("#aLink").attr("href", url);
             
-            if (userAgent.indexOf("android") < 0) {   
-                // With all platforms besides Android, we can directly jump into Venmo without showing this intermediate page
+//            if (userAgent.indexOf("android") < 0) {   
+                // With all platforms besides Android, we can directly jump into Venmo without the user clicking the button.
                 setTimeout(function() { 
                     location.href = url;
                 }, 10000);
-            }
+//            }
           
         });
 
