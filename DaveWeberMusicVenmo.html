@@ -39,9 +39,9 @@
 	
     <p>Dave's last 4 digits: <strong>8631</strong></p>
 
-    <p style="margin-left:40px; margin-top:20px"><a id="aLink" href="https://facebook.com/davewebermusic"><img src="ContinueWithFacebook.png" height="40px" /></a></p>
+    <p style="margin-left:40px; margin-top:20px"><a id="aLink" href="https://facebook.com/davewebermusic"><img src="ContinueWithVenmo.jpg" height="40px" /></a></p>
     
-    <p id="pMobileInstruction" class="instruction" style="display:none; margin-left:40px">* This will open in the Venmo App.</p>
+    <p class="instruction" style="display:none; margin-left:40px">* This will open in the Venmo App.</p>
             
     <script>
         $(function() {
@@ -51,18 +51,14 @@
             if (userAgent.indexOf("android") >= 0) {
                 // Android            
                 url = "intent://paycharge?txn=pay&recipients=DaveWeberMusic#Intent;package=com.venmo;scheme=venmo;end";
-                $("#pMobileInstruction").show();
 
             } else if (userAgent.indexOf("iphone") >= 0 || userAgent.indexOf("ipad") >=  0 || userAgent.indexOf("ios") >= 0 || userAgent.indexOf("macintosh") >= 0) {
                 // IOS - works for Safari or Chrome
                 url = "venmo://paycharge?txn=pay&recipients=DaveWeberMusic";
-                $("#pMobileInstruction").show();
-                $("#pAutoMessage").show();
 
             } else {
                 // Computer         
                 url = "https://www.venmo.com/DaveWeberMusic";
-                $("#pAutoMessage").show();
             }
         
             // Set where the link goes
