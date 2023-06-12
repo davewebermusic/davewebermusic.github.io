@@ -87,410 +87,421 @@
 
     
     <div style="margin-top: 10px" class="instructions">
-        <span id="spanDecade" style="display:none;">Filter by decade:</span>
-        <select id="selDecade" style="display:none;">
-            <option value="">All decades</option>
-            <option value="2020">2020s</option>
-            <option value="2010">2010s</option>
-            <option value="2000">2000s</option>
-            <option value="1990">1990s</option>
-            <option value="1980">1980s</option>
-            <option value="1970">1970s</option>
-            <option value="1960">1960s</option>
-            <option value="1950">1950s</option>
-            <option value="Old">Really old</option>
-        </select>
+        <div id="divDecade" style="display:none;">
+            <span>Filter by decade:</span>
+            <select id="selDecade">
+                <option value="">All decades</option>
+                <option value="2020">2020s</option>
+                <option value="2010">2010s</option>
+                <option value="2000">2000s</option>
+                <option value="1990">1990s</option>
+                <option value="1980">1980s</option>
+                <option value="1970">1970s</option>
+                <option value="1960">1960s</option>
+                <option value="1950">1950s</option>
+                <option value="Old">Really old</option>
+            </select>
+        </div>
+
+        <div id="divPartnerRole" style="display:none;">
+            <span>Fiter by partner role:</span>
+            <select id="selPartnerRole">
+                <option value=""></option>
+                <option value="Lead">Lead vocals</option>
+                <option value="BGV">Background vocals</option>
+            </select>
+        </div>
     </div>
     
     <script>
 
         var songs = [
-            { title: "1985", artist: "Bowling for Soup", tags: 'B,S', decade: "2000" },
+            { title: "1985", artist: "Bowling for Soup", tags: 'S', decade: "2000" },
             { title: "A Million Dreams", artist: "The Greatest Showman", tags: 'N,R', decade: "2010" },
             { title: "A Night Like This", artist: "Caro Emerald", tags: 'R', decade: "2010" },
             { title: "A Thousand Years", artist: "Christina Perri", tags: 'R', decade: "2010" },
-            { title: "About Damn Time", artist: "Lizzo", tags: 'B,N', decade: "2020" },
-            { title: "Ain't It Fun?", artist: "Paramore", tags: 'B,N', decade: "2010" },
-            { title: "Ain't No Rest for the Wicked", artist: "Cage the Elephant", tags: 'A,B,S', decade: "2000" },
+            { title: "About Damn Time", artist: "Lizzo", tags: 'N', decade: "2020" },
+            { title: "Ain't It Fun?", artist: "Paramore", tags: 'N', decade: "2010" },
+            { title: "Ain't No Rest for the Wicked", artist: "Cage the Elephant", tags: 'A,S', decade: "2000" },
             { title: "All I Need to Hear", artist: "The 1975", tags: 'D,S', decade: "2020" },
             { title: "All I've Ever Known", artist: "Hadestown", tags: 'A', decade: "2010" },
             { title: "All Of Me", artist: "John Legend", tags: 'D,R', decade: "2010" },
-            { title: "All On Me", artist: "Devin Dawson", tags: 'B,D,R', decade: "2010" },
-            { title: "All Too Well", artist: "Taylor Swift", tags: 'B,S', decade: "2010" },
+            { title: "All On Me", artist: "Devin Dawson", tags: 'D,R', decade: "2010" },
+            { title: "All Too Well", artist: "Taylor Swift", tags: 'S', decade: "2010" },
             { title: "Always and Forever", artist: "Heatwave", tags: 'D', decade: "1970" },
-            { title: "Always Remember Us This Way", artist: "Lady Gaga", tags: 'B,R,S', decade: "2010" },
-            { title: "American the Beautiful", artist: "Traditional", tags: 'B', decade: "Old" },
+            { title: "Always Remember Us This Way", artist: "Lady Gaga", tags: 'R,S', decade: "2010" },
+            { title: "American the Beautiful", artist: "Traditional", tags: '', decade: "Old" },
             { title: "Angel from Montgomery", artist: "Bonnie Raitt / John Prine", tags: 'R,S', decade: "1970" },
             { title: "Angie", artist: "Rolling Stones", tags: 'D', decade: "1970" },
             { title: "Annie's Song", artist: "John Denver", tags: 'D,R,S', decade: "1970" },
-            { title: "Are You Gonna Be My Girl", artist: "Jet", tags: 'B', decade: "2000" },
-            { title: "At Last", artist: "Etta James", tags: 'A,B,R,S', decade: "1960" },
+            { title: "Are You Gonna Be My Girl", artist: "Jet", tags: '', decade: "2000" },
+            { title: "At Last", artist: "Etta James", tags: 'A,R,S', decade: "1960" },
             { title: "August", artist: "Taylor Swift", tags: 'N,S', decade: "2020" },
             { title: "Autumn Leaves", artist: "Nat King Cole arr.", tags: 'A,D', decade: "1950" },
-            { title: "Babylon", artist: "David Gray", tags: 'D,R,S', decade: "1990" },
+            { title: "Babylon", artist: "David Gray", tags: 'D,R,SB', decade: "1990" },
             { title: "Back It Up", artist: "Caro Emerald", tags: 'R', decade: "2000" },
             { title: "Bauer Drive", artist: "Pete Looney", tags: 'D', decade: "2010" },
-            { title: "Beautiful Crazy", artist: "Luke Combs", tags: 'D,S', decade: "2010" },
-            { title: "Bed I Made", artist: "Allen Stone", tags: 'B', decade: "2010" },
+            { title: "Beautiful Crazy", artist: "Luke Combs", tags: 'D,SB', decade: "2010" },
+            { title: "Bed I Made", artist: "Allen Stone", tags: '', decade: "2010" },
             { title: "Before He Cheats", artist: "Carrie Underwood", tags: 'N,S', decade: "2000" },
             { title: "Behind Blue Eyes", artist: "The Who", tags: 'D', decade: "1970" },
             { title: "Billie Jean", artist: "Michael Jackson", tags: 'R,S', decade: "1980" },
-            { title: "Bellyache", artist: "Billie Eilish", tags: 'B,R', decade: "2010" },
+            { title: "Bellyache", artist: "Billie Eilish", tags: 'R', decade: "2010" },
             { title: "Ben", artist: "Michael Jackson", tags: 'A', decade: "1970" },
             { title: "Best Day of My Life", artist: "American Authors", tags: 'D,N,R', decade: "2000" },
             { title: "Best Days", artist: "Graham Colton", tags: 'D', decade: "2000" },
-            { title: "Best Part", artist: "Daniel Ceaser and H.E.R.", tags: 'A,B,D,R', decade: "2010" },
+            { title: "Best Part", artist: "Daniel Ceaser and H.E.R.", tags: 'A,D,R', decade: "2010" },
             { title: "Better Man", artist: "Little Big Town", tags: 'J,S', decade: "2010" },
-            { title: "Beverly Hills", artist: "Weezer", tags: 'B,N', decade: "2000" },
-            { title: "Black Horse and the Cherry Tree", artist: "KT Tunstall", tags: 'B', decade: "2000" },
+            { title: "Beverly Hills", artist: "Weezer", tags: 'N', decade: "2000" },
+            { title: "Black Horse and the Cherry Tree", artist: "KT Tunstall", tags: '', decade: "2000" },
             { title: "Blue", artist: "Ingrid Andress", tags: 'S', decade: "2020" },
             { title: "Boys of Summer", artist: "Don Henley", tags: 'D', decade: "1980" },
             { title: "Brand New", artist: "Ben Rector", tags: 'D', decade: "2010" },
-            { title: "Brandy", artist: "Looking Glass", tags: 'B', decade: "1970" },
+            { title: "Brandy", artist: "Looking Glass", tags: '', decade: "1970" },
             { title: "Brave", artist: "Sara Bareilles", tags: '', decade: "2000" },
             { title: "Breakeven", artist: "The Script (Colbi Caillat arr.)", tags: '', decade: "2000" },
             { title: "Breathe", artist: "Faith Hill", tags: 'R', decade: "1990" },
             { title: "Broken Horses", artist: "Brandi Carlile", tags: 'R', decade: "2020" },
-            { title: "Brown Eyed Girl", artist: "Van Morrison", tags: 'B,D,N,R', decade: "1960" },
-            { title: "Bubbly", artist: "Colbie Caillat", tags: 'B,R,N', decade: "2000" },
-            { title: "Burning Love", artist: "Elvis", tags: 'B', decade: "1972" },
+            { title: "Brown Eyed Girl", artist: "Van Morrison", tags: 'D,N,R', decade: "1960" },
+            { title: "Bubbly", artist: "Colbie Caillat", tags: 'R,N', decade: "2000" },
+            { title: "Burning Love", artist: "Elvis", tags: '', decade: "1972" },
             { title: "Butterflies", artist: "Kacey Musgraves", tags: 'N,S', decade: "2010" },
-            { title: "Can I Be Him?", artist: "James Arthur", tags: 'B', decade: "2010" },
-            { title: "Can't Help Falling in Love", artist: "Elvis", tags: 'B,D,S,N,R', decade: "1960" },
-            { title: "Can't Hurry Love", artist: "The Supremes", tags: 'B', decade: "1960" },
-            { title: "Can't Stop This Feeling", artist: "Justin Timberlake", tags: 'B,R', decade: "2010" },
-            { title: "Can't Take My Eyes Off Of You", artist: "Frankie Valli", tags: 'D,B,R', decade: "1960" },
+            { title: "Can I Be Him?", artist: "James Arthur", tags: '', decade: "2010" },
+            { title: "Can't Help Falling in Love", artist: "Elvis", tags: 'D,S,N,R', decade: "1960" },
+            { title: "Can't Hurry Love", artist: "The Supremes", tags: '', decade: "1960" },
+            { title: "Can't Stop This Feeling", artist: "Justin Timberlake", tags: 'R', decade: "2010" },
+            { title: "Can't Take My Eyes Off Of You", artist: "Frankie Valli", tags: 'D,R', decade: "1960" },
             { title: "Cannonball", artist: "Damien Rice", tags: 'S', decade: "2000" },
             { title: "Cathedrals", artist: "Jump, Little Children", tags: 'D', decade: "1990" },
-            { title: "Chicken Fried", artist: "Zac Brown Band", tags: 'D,S', decade: "2000" },
+            { title: "Chicken Fried", artist: "Zac Brown Band", tags: 'D,SB', decade: "2000" },
             { title: "Closer to Fine", artist: "Indigo Girls", tags: 'R', decade: "1980" },
-            { title: "Closing Time", artist: "Semisonic", tags: 'B,D,R', decade: "1990" },
+            { title: "Closing Time", artist: "Semisonic", tags: 'D,R', decade: "1990" },
             { title: "Cold Heart", artist: "Elton John / Dua Lipa", tags: 'N,R,S', decade: "2020" },
-            { title: "Collide", artist: "Howie Day", tags: 'B,D,R,S', decade: "2000" },
+            { title: "Collide", artist: "Howie Day", tags: 'D,R,SB', decade: "2000" },
             { title: "Comfortable", artist: "H.E.R.", tags: 'N', decade: "2020" },
-            { title: "Country Roads", artist: "John Denver", tags: 'B,D,R', decade: "1970" },
+            { title: "Country Roads", artist: "John Denver", tags: 'D,R', decade: "1970" },
             { title: "Cowbody Like Me", artist: "Taylor Swift", tags: 'S', decade: "2020" },
             { title: "Cowboy Take Me Away", artist: "The Chicks", tags: 'S', decade: "1990" },
-            { title: "Crazy", artist: "Gnarles Barkley", tags: 'B,D,R', decade: "2000" },
+            { title: "Crazy", artist: "Gnarles Barkley", tags: 'D,R', decade: "2000" },
             { title: "Crazy for You", artist: "Adele", tags: 'S', decade: "2000" },
-            { title: "Creep", artist: "Radiohead", tags: 'B,D,N,R', decade: "1990" },
+            { title: "Creep", artist: "Radiohead", tags: 'D,N,R', decade: "1990" },
             { title: "Crossfire", artist: "Stevie Ray Vaughan", tags: 'D', decade: "1980" },
             { title: "Cruisin'", artist: "Smoky Robinson (Paltrow & Lewis arr.)", tags: 'D,R', decade: "1970" },
-            { title: "Cry Me a River", artist: "Julie London", tags: 'B', decade: "1950" },
-            { title: "Dancing Queen", artist: "ABBA", tags: 'B,R,N', decade: "1970" },
-            { title: "Danger Zone", artist: "Kenny Loggins", tags: 'B', decade: "1980" },
+            { title: "Cry Me a River", artist: "Julie London", tags: '', decade: "1950" },
+            { title: "Dancing Queen", artist: "ABBA", tags: 'R,N', decade: "1970" },
+            { title: "Danger Zone", artist: "Kenny Loggins", tags: '', decade: "1980" },
             { title: "Daughters", artist: "John Mayer", tags: 'D', decade: "2000" },
             { title: "Dear Maria Count Me In", artist: "All Time Low", tags: 'S', decade: "2000" },
-            { title: "Desperado", artist: "Eagles", tags: 'B', decade: "1970" },
+            { title: "Desperado", artist: "Eagles", tags: '', decade: "1970" },
             { title: "Do Friends Fall In Love", artist: "Rachael & Vilray", tags: 'R,N', decade: "2010" },
             { title: "Don't Dream It's Over", artist: "Crowded House (Sixpense arr.)", tags: 'N,R', decade: "1980" },
-            { title: "Don't Know Why", artist: "Norah Jones", tags: 'B,R', decade: "2000" },
+            { title: "Don't Know Why", artist: "Norah Jones", tags: 'R', decade: "2000" },
             { title: "Don't Stop Believin'", artist: "Journey", tags: 'N,S', decade: "1980" },
-            { title: "Don't You Forget About Me", artist: "Simple Minds", tags: 'B', decade: "1980" },
+            { title: "Don't You Forget About Me", artist: "Simple Minds", tags: '', decade: "1980" },
             { title: "Dream a Little Dream of Me", artist: "The Mamas & the Papas", tags: 'R,S', decade: "1960" },
             { title: "Dreams", artist: "The Cranberries", tags: 'R', decade: "1990" },
-            { title: "Dreams", artist: "Fleetwood Mac", tags: 'B,N,R,S', decade: "1970" },
-            { title: "Drift Away", artist: "Dobie Gray", tags: 'B,D,S', decade: "1970" },
-            { title: "Driver's License", artist: "Olivia Rodrigo", tags: 'B,N', decade: "2020" },
-            { title: "Drops of Jupiter", artist: "Train", tags: 'B,R', decade: "2000" },
-            { title: "Easy", artist: "Commodores", tags: 'D,R,S', decade: "1970" },
-            { title: "Easy On Me", artist: "Adele", tags: 'B,S', decade: "2020" },
-            { title: "Edelweiss", artist: "Sound of Music", tags: 'B,D,R', decade: "1950" },
+            { title: "Dreams", artist: "Fleetwood Mac", tags: 'N,R,S', decade: "1970" },
+            { title: "Drift Away", artist: "Dobie Gray", tags: 'D,SB', decade: "1970" },
+            { title: "Driver's License", artist: "Olivia Rodrigo", tags: 'N', decade: "2020" },
+            { title: "Drops of Jupiter", artist: "Train", tags: 'R', decade: "2000" },
+            { title: "Easy", artist: "Commodores", tags: 'D,R,SB', decade: "1970" },
+            { title: "Easy On Me", artist: "Adele", tags: 'S', decade: "2020" },
+            { title: "Edelweiss", artist: "Sound of Music", tags: 'D,R', decade: "1950" },
             { title: "Eight Days a Week", artist: "The Beatles", tags: 'D,N,R', decade: "1960" },
             { title: "Embraceable You", artist: "Ella Fitzgerald arr.", tags: 'A', decade: "1950" },
             { title: "Emmylou", artist: "First Aid Kit", tags: 'R', decade: "2000" },
             { title: "Everlong", artist: "Foo Fighters", tags: 'D', decade: "1990" },
-            { title: "Everybody Wants to Rule the World", artist: "Tears for Fears", tags: 'B,D,R', decade: "1980" },
+            { title: "Everybody Wants to Rule the World", artist: "Tears for Fears", tags: 'D,R', decade: "1980" },
             { title: "Everything Has Changed", artist: "Taylor Swift & Ed Sheeran", tags: 'S', decade: "2010" },
             { title: "Everything I Know", artist: "In the Heights", tags: 'A,N', decade: "2000" },
-            { title: "Everything You Want", artist: "Vertical Horizon", tags: 'D,S', decade: "1990" },
+            { title: "Everything You Want", artist: "Vertical Horizon", tags: 'D,SB', decade: "1990" },
             { title: "Extraordinary Magic", artist: "Ben Rector", tags: 'D', decade: "2010" },
-            { title: "Faith", artist: "George Michael", tags: 'B', decade: "1980" },
-            { title: "Fallin for You", artist: "Colbie Caillat", tags: 'B', decade: "2000" },
-            { title: "Falling Slowly", artist: "Glen Hansard (Once)", tags: 'B,D,R', decade: "2000" },
+            { title: "Faith", artist: "George Michael", tags: '', decade: "1980" },
+            { title: "Fallin for You", artist: "Colbie Caillat", tags: '', decade: "2000" },
+            { title: "Falling Slowly", artist: "Glen Hansard (Once)", tags: 'D,R', decade: "2000" },
             { title: "Fast Car", artist: "Tracy Chapman", tags: 'S', decade: "1980" },
-            { title: "Fat Bottomed Girls", artist: "Queen", tags: 'B', decade: "1970" },
-            { title: "Fever", artist: "Peggy Lee", tags: 'B,R', decade: "1950" },
+            { title: "Fat Bottomed Girls", artist: "Queen", tags: '', decade: "1970" },
+            { title: "Fever", artist: "Peggy Lee", tags: 'R', decade: "1950" },
             { title: "Fields of Gold", artist: "Sting", tags: 'D,R', decade: "1990" },
             { title: "Figures", artist: "Jessie Reyez", tags: 'S', decade: "2010" },
             { title: "Fire and Rain", artist: "James Taylor", tags: 'D', decade: "1970" },
-            { title: "Fix You", artist: "Coldplay (Boyce Avenue arr.)", tags: 'B,N,R,S', decade: "2000" },
+            { title: "Fix You", artist: "Coldplay (Boyce Avenue arr.)", tags: 'N,R,S', decade: "2000" },
             { title: "Flowers", artist: "Miley Cyrus", tags: 'N,R,S', decade: "2020" },
             { title: "Folsom Prison Blues", artist: "Johnny Cash", tags: 'D', decade: "1950" },
-            { title: "For Good", artist: "Wicked", tags: 'B,N', decade: "2000" },
+            { title: "For Good", artist: "Wicked", tags: 'N', decade: "2000" },
             { title: "Free Fallin'", artist: "Tom Petty", tags: 'D', decade: "1980" },
-            { title: "Friday I'm in Love", artist: "The Cure", tags: 'D,B,N,S', decade: "1990" },
+            { title: "Friday I'm in Love", artist: "The Cure", tags: 'D,N,SB', decade: "1990" },
             { title: "Games People Play", artist: "The Spinners", tags: 'D,R', decade: "1970" },
             { title: "Gently Break It", artist: "Beck Pete", tags: 'S', decade: "2010" },
-            { title: "Georgia on My Mind", artist: "Ray Charles", tags: 'B,D', decade: "1960" },
-            { title: "Girl Crush", artist: "Little Big Town", tags: 'B,N', decade: "2010" },
-            { title: "Give a Little Bit", artist: "Supertramp", tags: 'B', decade: "1970" },
+            { title: "Georgia on My Mind", artist: "Ray Charles", tags: 'D', decade: "1960" },
+            { title: "Girl Crush", artist: "Little Big Town", tags: 'N', decade: "2010" },
+            { title: "Give a Little Bit", artist: "Supertramp", tags: '', decade: "1970" },
             { title: "God Only Knows", artist: "The Beach Boys", tags: 'D,R', decade: "1960" },
             { title: "Golden Hour", artist: "Kacey Musgraves", tags: 'N,S', decade: "2010" },
-            { title: "Good Kisser", artist: "Lake Street Dive", tags: 'B', decade: "2010" },
-            { title: "Good Riddance", artist: "Green Day", tags: 'B,D,N', decade: "1990" },
+            { title: "Good Kisser", artist: "Lake Street Dive", tags: '', decade: "2010" },
+            { title: "Good Riddance", artist: "Green Day", tags: 'D,N', decade: "1990" },
             { title: "Gravity", artist: "John Mayer", tags: 'D,R', decade: "2000" },
             { title: "Gravity", artist: "Sara Bareilles and Elton John", tags: '', decade: "2000" },
-            { title: "Grow As We Go", artist: "Ben Platt", tags: 'B', decade: "2010" },
+            { title: "Grow As We Go", artist: "Ben Platt", tags: '', decade: "2010" },
             { title: "Half of My Hometown", artist: "Kelsea Ballerini & Kenny Chesney", tags: 'S', decade: "2020" },
             { title: "Harder to Breathe", artist: "Maroon 5", tags: 'S', decade: "2000" },
-            { title: "Have You Ever Seen the Rain", artist: "Creedence Clearwater Revival", tags: 'B,D,R', decade: "1970" },
-            { title: "Heads Carolina, Tails California", artist: "Jo Dee Messina", tags: 'B,R', decade: "1990" },
-            { title: "Heard it Through the Grapevine", artist: "Marvin Gaye", tags: 'B,R', decade: "1960" },
+            { title: "Have You Ever Seen the Rain", artist: "Creedence Clearwater Revival", tags: 'D,R', decade: "1970" },
+            { title: "Heads Carolina, Tails California", artist: "Jo Dee Messina", tags: 'R', decade: "1990" },
+            { title: "Heard it Through the Grapevine", artist: "Marvin Gaye", tags: 'R', decade: "1960" },
             { title: "Heart in Hand", artist: "Vertical Horizon", tags: 'D', decade: "1990" },
             { title: "Heart of the Matter", artist: "Don Henley", tags: '', decade: "1980" },
-            { title: "Heather", artist: "Conan Gray", tags: 'B', decade: "2020" },
+            { title: "Heather", artist: "Conan Gray", tags: '', decade: "2020" },
             { title: "Hello It's Me", artist: "Todd Rundgren", tags: 'D,R', decade: "1970" },
-            { title: "Hey Soul Sister", artist: "Train", tags: 'B,N,R', decade: "2000" },
+            { title: "Hey Soul Sister", artist: "Train", tags: 'N,R', decade: "2000" },
             { title: "Hey, There Delilah", artist: "Plain White T's", tags: 'D', decade: "2000" },
-            { title: "Ho Hey", artist: "The Lumineers", tags: 'B,N,R', decade: "2010" },
+            { title: "Ho Hey", artist: "The Lumineers", tags: 'N,R', decade: "2010" },
             { title: "Holding On with Both Hands", artist: "Giraffe / Kevin Gilbert", tags: 'D', decade: "1980" },
-            { title: "Home", artist: "Phillip Phillips", tags: 'B,D,N,R', decade: "2000" },
+            { title: "Home", artist: "Phillip Phillips", tags: 'D,N,R', decade: "2000" },
             { title: "Honey, I'm Home", artist: "Shania Twain", tags: 'S', decade: "1990" },
             { title: "How Deep is Your Love", artist: "The Bee Gees", tags: 'R', decade: "1970" },
             { title: "How Sweet It Is", artist: "James Taylor", tags: 'D,R', decade: "1970" },
             { title: "Hungry Heart", artist: "Bruce Springsteen", tags: 'D', decade: "1980" },
             { title: "Hypotheticals", artist: "Lake Street Dive", tags: 'N', decade: "2020" },
-            { title: "I Can See Clearly Now", artist: "Johnny Nash", tags: 'B,D,R', decade: "1970" },
+            { title: "I Can See Clearly Now", artist: "Johnny Nash", tags: 'D,R', decade: "1970" },
             { title: "I Can't Make You Love Me", artist: "Bonnie Raitt", tags: 'R', decade: "1990" },
             { title: "I Can't Tell You Why", artist: "Eagles", tags: '', decade: "1980" },
             { title: "I Lost a Friend", artist: "Finneas", tags: 'D', decade: "2010" },
-            { title: "I Only Wanna Be With You", artist: "Hootie and the Blowfish", tags: 'D,R,S', decade: "1990" },
+            { title: "I Only Wanna Be With You", artist: "Hootie and the Blowfish", tags: 'D,R,SB', decade: "1990" },
             { title: "I Run to You", artist: "Lady A", tags: 'A', decade: "2000" },
             { title: "I Say a Little Prayer", artist: "Lianne La Havas", tags: 'D,N,R', decade: "1960" },
             { title: "I Think I Love You", artist: "Partridge Family", tags: 'D', decade: "1970" },
-            { title: "I Wanna Dance with Somebody", artist: "Whitney Houston", tags: 'B,R', decade: "1980" },
-            { title: "I Wanna Stay Home", artist: "Jellyfish", tags: 'D,B', decade: "1990" },
+            { title: "I Wanna Dance with Somebody", artist: "Whitney Houston", tags: 'R', decade: "1980" },
+            { title: "I Wanna Stay Home", artist: "Jellyfish", tags: 'D', decade: "1990" },
             { title: "I Will Follow You Into the Dark", artist: "Death Cab for Cutie", tags: 'D', decade: "2000" },
             { title: "I Will Remember You", artist: "Sarah McLaughlin", tags: '', decade: "1990" },
             { title: "I Will Wait", artist: "Mumford & Sons", tags: 'R', decade: "2000" },
-            { title: "IDK You Yet", artist: "Alexander 23", tags: 'B', decade: "2020" },
+            { title: "IDK You Yet", artist: "Alexander 23", tags: '', decade: "2020" },
             { title: "If I Knew", artist: "Bruno Mars", tags: 'S', decade: "2010" },
-            { title: "If I Ain't Got You", artist: "Alicia Keys", tags: 'B,R,N', decade: "2000" },
-            { title: "If You Could Only See", artist: "Tonic", tags: 'D,R,S', decade: "1990" },
-            { title: "If You Don't Know Me by Now", artist: "Melvin Gordon (Stan Taylor arr.)", tags: 'B', decade: "1970" },
-            { title: "I'll be Around", artist: "The Spinners", tags: 'D,N,R,S', decade: "1970" },
-            { title: "I'll be There", artist: "Jackson 5 (Mariah Carey arr.)", tags: 'B,N', decade: "1970" },
-            { title: "I'll be There for You (Friends theme)", artist: "The Rembrandts", tags: 'B', decade: "1990" },
+            { title: "If I Ain't Got You", artist: "Alicia Keys", tags: 'R,N', decade: "2000" },
+            { title: "If You Could Only See", artist: "Tonic", tags: 'D,R,SB', decade: "1990" },
+            { title: "If You Don't Know Me by Now", artist: "Melvin Gordon (Stan Taylor arr.)", tags: '', decade: "1970" },
+            { title: "I'll be Around", artist: "The Spinners", tags: 'D,N,R,SB', decade: "1970" },
+            { title: "I'll be There", artist: "Jackson 5 (Mariah Carey arr.)", tags: 'N', decade: "1970" },
+            { title: "I'll be There for You (Friends theme)", artist: "The Rembrandts", tags: '', decade: "1990" },
             { title: "I'm Eighteen", artist: "Alice Cooper", tags: 'D', decade: "1970" },
-            { title: "I'm Gonna Be (500 Miles)", artist: "The Proclaimers", tags: 'B,N,R', decade: "1990" },
+            { title: "I'm Gonna Be (500 Miles)", artist: "The Proclaimers", tags: 'N,R', decade: "1990" },
             { title: "I'm One", artist: "The Who", tags: 'D', decade: "1970" },
-            { title: "I'm Yours", artist: "Jason Mraz", tags: 'B,N,R', decade: "2000" },
+            { title: "I'm Yours", artist: "Jason Mraz", tags: 'N,R', decade: "2000" },
             { title: "Imagine", artist: "John Lennon", tags: 'D,R,S', decade: "1970" },
-            { title: "Isn't She Lovely", artist: "Stevie Wonder", tags: 'B,D,N,R', decade: "1970" },
-            { title: "It Had to be You", artist: "Frank Sinatra / Harry Connick Jr.", tags: 'B,R', decade: "Old" },
+            { title: "Isn't She Lovely", artist: "Stevie Wonder", tags: 'D,N,R', decade: "1970" },
+            { title: "It Had to be You", artist: "Frank Sinatra / Harry Connick Jr.", tags: 'R', decade: "Old" },
             { title: "It's Too late", artist: "Carole King", tags: 'D,RToDo', decade: "1970" },
             { title: "I've Got to Use My Imagination", artist: "Gladys Knight and the Pips", tags: 'R', decade: "1970" },
             { title: "I've Just Seen a Face", artist: "The Beatles", tags: 'D', decade: "1960" },
-            { title: "Juice", artist: "Lizzo", tags: 'B,N', decade: "2010" },
+            { title: "Juice", artist: "Lizzo", tags: 'N', decade: "2010" },
             { title: "Just Give Me a Reason", artist: "Pink", tags: 'R', decade: "2010" },
-            { title: "Just My Imagination", artist: "The Temptations", tags: 'B', decade: "1970" },
+            { title: "Just My Imagination", artist: "The Temptations", tags: '', decade: "1970" },
             { title: "Just The Way You Are", artist: "Billy Joel", tags: 'D,R', decade: "1970" },
             { title: "Just To See You Smile", artist: "Tim McGraw", tags: 'D', decade: "1990" },
-            { title: "Killer Queen", artist: "Queen", tags: 'B', decade: "1970" },
+            { title: "Killer Queen", artist: "Queen", tags: '', decade: "1970" },
             { title: "Killing Me Softly", artist: "Roberta Flack", tags: 'R,N', decade: "1970" },
-            { title: "Kiss Me", artist: "Sixpense None the Richer", tags: 'B,N,R', decade: "1990" },
-            { title: "Landslide", artist: "Fleetwood Mac", tags: 'B,D,N,R,S', decade: "1970" },
-            { title: "Layla - Acoustic", artist: "Eric Clapton", tags: 'D,S', decade: "1990" },
+            { title: "Kiss Me", artist: "Sixpense None the Richer", tags: 'N,R', decade: "1990" },
+            { title: "Landslide", artist: "Fleetwood Mac", tags: 'D,N,R,S', decade: "1970" },
+            { title: "Layla - Acoustic", artist: "Eric Clapton", tags: 'D,SB', decade: "1990" },
             { title: "Learn to Fly", artist: "Foo Fighters", tags: 'D', decade: "1990" },
-            { title: "Let It Be", artist: "The Beatles", tags: 'B,D,R,S', decade: "1970" },
+            { title: "Let It Be", artist: "The Beatles", tags: 'D,R,S', decade: "1970" },
             { title: "Let's Stay Together", artist: "Al Green", tags: 'D,R', decade: "1970" },
             { title: "Levitating", artist: "Dua Lipa", tags: 'R,S', decade: "2020" },
-            { title: "Life is a Highway", artist: "Tom Cochrane / Rascal Flatts", tags: 'B,N,R,S', decade: "1990" },
-            { title: "Lights", artist: "Journey", tags: 'B', decade: "1970" },
-            { title: "Like I'm Gonna Lose You", artist: "Meghan Trainor & John Legend", tags: 'B,R,N', decade: "2010" },
+            { title: "Life is a Highway", artist: "Tom Cochrane / Rascal Flatts", tags: 'N,R,S', decade: "1990" },
+            { title: "Lights", artist: "Journey", tags: '', decade: "1970" },
+            { title: "Like I'm Gonna Lose You", artist: "Meghan Trainor & John Legend", tags: 'R,N', decade: "2010" },
             { title: "Live Forever", artist: "Drew Holcomb and the Neighbors", tags: 'D', decade: "2010" },
-            { title: "Living on a Prayer", artist: "Bon Jovi", tags: 'B,R,S', decade: "1980" },
-            { title: "Location Unknown", artist: "Honne & BEKA", tags: 'B', decade: "2010" },
-            { title: "Lonely Boy", artist: "The Black Keys", tags: 'B,D,S', decade: "2010" },
+            { title: "Living on a Prayer", artist: "Bon Jovi", tags: 'R,S', decade: "1980" },
+            { title: "Location Unknown", artist: "Honne & BEKA", tags: '', decade: "2010" },
+            { title: "Lonely Boy", artist: "The Black Keys", tags: 'D,SB', decade: "2010" },
             { title: "Long and Winding Road", artist: "The Beatles", tags: 'D,R', decade: "1970" },
             { title: "Long December", artist: "Counting Crows", tags: 'D', decade: "1990" },
             { title: "Lost Cause", artist: "Billie Eilish", tags: 'S', decade: "2020" },
-            { title: "Love Grows Where My Rosemary Goes", artist: "Edison Lighthouse", tags: 'B,N', decade: "1970" },
+            { title: "Love Grows Where My Rosemary Goes", artist: "Edison Lighthouse", tags: 'N', decade: "1970" },
             { title: "Lost In My Mind", artist: "The Head and the Heart", tags: 'D', decade: "2010" },
             { title: "Love is a Losing Game", artist: "Amy Winehouse", tags: 'N', decade: "2000" },
             { title: "Love is a Wild Thing", artist: "Kacey Musgraves", tags: 'N,R,S', decade: "2010" },
             { title: "Love Reign O'er Me", artist: "The Who", tags: 'D', decade: "1970" },
-            { title: "Lovesong", artist: "Adele", tags: 'B,R,S', decade: "2010" },
-            { title: "Love Story", artist: "Taylor Swift", tags: 'B,R,N,S', decade: "2000" },
+            { title: "Lovesong", artist: "Adele", tags: 'R,S', decade: "2010" },
+            { title: "Love Story", artist: "Taylor Swift", tags: 'R,N,S', decade: "2000" },
             { title: "Lyin Eyes", artist: "Eagles", tags: 'D', decade: "1970" },
-            { title: "Make it Rain", artist: "Ed Sheeran", tags: 'B,S', decade: "2000" },
-            { title: "Make You Feel My Love", artist: "Bob Dylan (Adele arr.)", tags: 'B,D,N,R,S', decade: "1990" },
-            { title: "Man, I Feel Like a Woman", artist: "Shania Twain", tags: 'B,R,S', decade: "1990" },
-            { title: "Man in the Mirror", artist: "Michael Jackson", tags: 'B,S', decade: "1980" },
-            { title: "Manhattan", artist: "Sara Bareilles", tags: 'B', decade: "2010" },
+            { title: "Make it Rain", artist: "Ed Sheeran", tags: 'S', decade: "2000" },
+            { title: "Make You Feel My Love", artist: "Bob Dylan (Adele arr.)", tags: 'D,N,R,S', decade: "1990" },
+            { title: "Man, I Feel Like a Woman", artist: "Shania Twain", tags: 'R,S', decade: "1990" },
+            { title: "Man in the Mirror", artist: "Michael Jackson", tags: 'S', decade: "1980" },
+            { title: "Manhattan", artist: "Sara Bareilles", tags: '', decade: "2010" },
             { title: "Maroon", artist: "Taylor Swift", tags: 'S', decade: "2000" },
-            { title: "Marry You", artist: "Bruno Mars", tags: 'B,N,R,S', decade: "2010" },
+            { title: "Marry You", artist: "Bruno Mars", tags: 'N,R,S', decade: "2010" },
             { title: "Mary Jane's Last Dance", artist: "Tom Petty", tags: 'D', decade: "1990" },
-            { title: "Me and Bobby McGee", artist: "Janis Joplin", tags: 'B', decade: "1970" },
+            { title: "Me and Bobby McGee", artist: "Janis Joplin", tags: '', decade: "1970" },
             { title: "Meant To Be", artist: "Bebe Rexha and Florida Georgia Line", tags: 'R', decade: "2010" },
             { title: "Melissa", artist: "The Allman Brothers Band", tags: 'D,R', decade: "1970" },
-            { title: "Missing You", artist: "All Time Low", tags: 'B,D', decade: "2010" },
-            { title: "Moon River", artist: "Henry Mancini / Audrey Hepburn", tags: 'B', decade: "1960" },
-            { title: "More Hearts Than Mine", artist: "Ingrid Andress", tags: 'B,R,S', decade: "2010" },
-            { title: "More Today Than Yesterday", artist: "Spiral Starecase", tags: 'B,D', decade: "1960" },
-            { title: "Mr. Brightside", artist: "The Killers", tags: 'B,N,S', decade: "2000" },
+            { title: "Missing You", artist: "All Time Low", tags: 'D', decade: "2010" },
+            { title: "Moon River", artist: "Henry Mancini / Audrey Hepburn", tags: '', decade: "1960" },
+            { title: "More Hearts Than Mine", artist: "Ingrid Andress", tags: 'R,S', decade: "2010" },
+            { title: "More Today Than Yesterday", artist: "Spiral Starecase", tags: 'D', decade: "1960" },
+            { title: "Mr. Brightside", artist: "The Killers", tags: 'N,S', decade: "2000" },
             { title: "My Cherie Amour", artist: "Stevie Wonder", tags: 'A', decade: "1960" },
-            { title: "My Church", artist: "Maren Morris", tags: 'B,N,R,S', decade: "2010" },
-            { title: "My Girl", artist: "The Temptations", tags: 'B,D,N,R,S', decade: "1960" },
-            { title: "Natural Woman", artist: "Aretha Franklin", tags: 'B,R', decade: "1960" },
-            { title: "Need You Now", artist: "Lady A", tags: 'B,R,S', decade: "2000" },
+            { title: "My Church", artist: "Maren Morris", tags: 'N,R,S', decade: "2010" },
+            { title: "My Girl", artist: "The Temptations", tags: 'D,N,R,SB', decade: "1960" },
+            { title: "Natural Woman", artist: "Aretha Franklin", tags: 'R', decade: "1960" },
+            { title: "Need You Now", artist: "Lady A", tags: 'R,S', decade: "2000" },
             { title: "Neon Moon", artist: "Kacey Musgraves & Brooks & Dunn", tags: 'S', decade: "2010" },
             { title: "Never Can Say Goodbye", artist: "Jackson 5", tags: 'N', decade: "1970" },
-            { title: "Never Enough", artist: "The Greatest Showman", tags: 'B', decade: "2010" },
-            { title: "Never Gonna Give You Up", artist: "Rick Astley", tags: 'B', decade: "1980" },
+            { title: "Never Enough", artist: "The Greatest Showman", tags: '', decade: "2010" },
+            { title: "Never Gonna Give You Up", artist: "Rick Astley", tags: '', decade: "1980" },
             { title: "Never Let You Go", artist: "Third Eye Blind", tags: 'S', decade: "1990" },
-            { title: "Never Tear Us Apart", artist: "INXS", tags: 'B,D', decade: "1990" },
-            { title: "New York State of Mind", artist: "Billy Joel", tags: 'B,R', decade: "1970" },
-            { title: "Night Changes", artist: "One Direction", tags: 'B', decade: "2010" },
-            { title: "Nothing", artist: "Bruno Major", tags: 'B', decade: "2020" },
+            { title: "Never Tear Us Apart", artist: "INXS", tags: 'D', decade: "1990" },
+            { title: "New York State of Mind", artist: "Billy Joel", tags: 'R', decade: "1970" },
+            { title: "Night Changes", artist: "One Direction", tags: '', decade: "2010" },
+            { title: "Nothing", artist: "Bruno Major", tags: '', decade: "2020" },
             { title: "Nowhere to Run", artist: "Martha Reeves and the Vandellas", tags: 'R', decade: "1960" },
             { title: "Ob-La-Di, Ob-La-Da", artist: "The Beatles", tags: 'N,R', decade: "1960" },
             { title: "Ocean Avenue", artist: "Yellowcard", tags: 'S', decade: "2000" },
             { title: "One Hand in My Pocket", artist: "Alanis Morissette", tags: 'R', decade: "1990" },
-            { title: "One Man Band", artist: "Old Dominion", tags: 'B,D', decade: "2010" },
+            { title: "One Man Band", artist: "Old Dominion", tags: 'D', decade: "2010" },
             { title: "Ooh Baby Baby", artist: "Smokey Robinson", tags: 'D,R', decade: "1960" },
             { title: "Ordinary World", artist: "Duran Duran", tags: 'D', decade: "1980" },
             { title: "Over My Head", artist: "Fleetwood Mac", tags: 'S', decade: "1970" },
-            { title: "Party in the USA", artist: "Miley Cyrus", tags: 'B,N,R', decade: "2000" },
+            { title: "Party in the USA", artist: "Miley Cyrus", tags: 'N,R', decade: "2000" },
             { title: "Peace Bomb", artist: "Eric Scott", tags: 'D', decade: "2020" },
-            { title: "Peace of Mind", artist: "Boston", tags: 'B,S', decade: "1970" },
-            { title: "Peaceful Easy Feeling", artist: "Eagles", tags: 'D,R,S', decade: "1970" },
-            { title: "People Get Ready", artist: "Eva Casidy, Rod Stewart, Jeff Beck arr.", tags: 'B', decade: "1980" },
+            { title: "Peace of Mind", artist: "Boston", tags: 'S', decade: "1970" },
+            { title: "Peaceful Easy Feeling", artist: "Eagles", tags: 'D,R,SB', decade: "1970" },
+            { title: "People Get Ready", artist: "Eva Casidy, Rod Stewart, Jeff Beck arr.", tags: '', decade: "1980" },
             { title: "Photograph", artist: "Ed Sheeran", tags: 'R', decade: "1980" },
             { title: "Piano Man", artist: "Billy Joel", tags: 'D', decade: "1970" },
-            { title: "Picture to Burn", artist: "Taylor Swift", tags: 'B,N', decade: "2000" },
+            { title: "Picture to Burn", artist: "Taylor Swift", tags: 'N', decade: "2000" },
             { title: "Poison & Wine", artist: "The Civil Wars", tags: 'R', decade: "2000" },
             { title: "Pretty Maids All in a Row", artist: "Eagles", tags: 'D', decade: "1970" },
             { title: "Proud Mary", artist: "Creedence Clearwater Revival / Tina Turner", tags: 'D', decade: "1960" },
-            { title: "Put Your Records On", artist: "Corinne Bailey Rae", tags: 'B,N,S', decade: "2000" },
+            { title: "Put Your Records On", artist: "Corinne Bailey Rae", tags: 'N,S', decade: "2000" },
             { title: "Raindrops Keep Fallin' on My Head", artist: "Burt Bacharach / B.J. Thomas", tags: 'D', decade: "1960" },
-            { title: "Redneck Woman", artist: "Gretchen Wilson", tags: 'B,S', decade: "2000" },
-            { title: "Reelin' in the Years", artist: "Steely Dan", tags: 'D,S', decade: "1970" },
-            { title: "Rich Girl", artist: "Hall and Oats", tags: 'B,S', decade: "1970" },
-            { title: "Ride", artist: "Twenty One Pilots", tags: 'B', decade: "2010" },
+            { title: "Redneck Woman", artist: "Gretchen Wilson", tags: 'S', decade: "2000" },
+            { title: "Reelin' in the Years", artist: "Steely Dan", tags: 'D,SB', decade: "1970" },
+            { title: "Rich Girl", artist: "Hall and Oats", tags: 'S', decade: "1970" },
+            { title: "Ride", artist: "Twenty One Pilots", tags: '', decade: "2010" },
             { title: "Ripple", artist: "Grateful Dead", tags: 'D', decade: "1970" },
-            { title: "Riptide", artist: "Vance Joy", tags: 'B', decade: "2010" },
+            { title: "Riptide", artist: "Vance Joy", tags: '', decade: "2010" },
             { title: "River", artist: "Leon Bridges", tags: 'D,R', decade: "2010" },
-            { title: "Rocket Man", artist: "Elton John", tags: 'B,D', decade: "1970" },
+            { title: "Rocket Man", artist: "Elton John", tags: 'D', decade: "1970" },
             { title: "Rolling in the Deep", artist: "Adele", tags: 'R,S', decade: "2010" },
-            { title: "Route 66", artist: "Chuck Berry arr.", tags: 'B', decade: "1960" },
+            { title: "Route 66", artist: "Chuck Berry arr.", tags: '', decade: "1960" },
             { title: "Safe Place to Land", artist: "Sara Bareilles and John Legend", tags: 'R', decade: "2010" },
-            { title: "Sara, Smile", artist: "Hall and Oats", tags: 'D,N,R,S', decade: "1970" },
+            { title: "Sara, Smile", artist: "Hall and Oats", tags: 'D,N,R,SB', decade: "1970" },
             { title: "Saturday in the Park", artist: "Chicago", tags: 'D', decade: "1970" },
-            { title: "Shallow", artist: "Bradley Cooper and Lady Gaga", tags: 'B,R,N,S', decade: "2010" },
+            { title: "Shallow", artist: "Bradley Cooper and Lady Gaga", tags: 'R,N,S', decade: "2010" },
             { title: "She Is Love", artist: "Parachute", tags: 'D', decade: "2000" },
-            { title: "She Used to be Mine", artist: "Sara Bareilles (Waitress)", tags: 'B,N', decade: "2010" },
-            { title: "She Will be Loved", artist: "Maroon 5", tags: 'B,N', decade: "2000" },
+            { title: "She Used to be Mine", artist: "Sara Bareilles (Waitress)", tags: 'N', decade: "2010" },
+            { title: "She Will be Loved", artist: "Maroon 5", tags: 'N', decade: "2000" },
             { title: "Shower the People", artist: "James Taylor", tags: 'D', decade: "1970" },
             { title: "Sittin on the Dock of the Bay", artist: "Otis Redding", tags: 'R', decade: "1960" },
-            { title: "Six Feet Under", artist: "Billie Eilish", tags: 'B', decade: "2010" },
-            { title: "Skate", artist: "Silk Sonic", tags: 'B,N', decade: "2020" },
+            { title: "Six Feet Under", artist: "Billie Eilish", tags: '', decade: "2010" },
+            { title: "Skate", artist: "Silk Sonic", tags: 'N', decade: "2020" },
             { title: "Simply The Best", artist: "Tina Turner - Billiane arr", tags: 'D,R,S', decade: "2020" },
-            { title: "Slide", artist: "Goo Goo Dolls", tags: 'D,R,S', decade: "1990" },
+            { title: "Slide", artist: "Goo Goo Dolls", tags: 'D,R,SB', decade: "1990" },
             { title: "Slow Burn", artist: "Kacey Musgraves", tags: 'S', decade: "2010" },
-            { title: "Smile", artist: "Nat King Cole arr.", tags: 'B,N', decade: "1960" },
-            { title: "So Far Away", artist: "Carole King", tags: 'B', decade: "1970" },
-            { title: "Soak Up the Sun", artist: "Sheryl Crow", tags: 'B,R', decade: "2000" },
+            { title: "Smile", artist: "Nat King Cole arr.", tags: 'N', decade: "1960" },
+            { title: "So Far Away", artist: "Carole King", tags: '', decade: "1970" },
+            { title: "Soak Up the Sun", artist: "Sheryl Crow", tags: 'R', decade: "2000" },
             { title: "Sola", artist: "Jessie Reyez", tags: 'A,N', decade: "2010" },
             { title: "Somebody Like You", artist: "Keith Urban", tags: 'D,R', decade: "2000" },
-            { title: "Somebody To Love", artist: "Queen", tags: 'B', decade: "1970" },
-            { title: "Something", artist: "The Beatles", tags: 'D,R,S', decade: "1960" },
-            { title: "Something in the Orange", artist: "Zach Bryan", tags: 'D,S', decade: "2020" },
-            { title: "Something Just Like This", artist: "The Chainsmokers and Coldplay", tags: 'B,R', decade: "2010" },
-            { title: "Somewhere Only We Know", artist: "Keane", tags: 'B,R', decade: "2000" },
+            { title: "Somebody To Love", artist: "Queen", tags: '', decade: "1970" },
+            { title: "Something", artist: "The Beatles", tags: 'D,R,SB', decade: "1960" },
+            { title: "Something in the Orange", artist: "Zach Bryan", tags: 'D,SB', decade: "2020" },
+            { title: "Something Just Like This", artist: "The Chainsmokers and Coldplay", tags: 'R', decade: "2010" },
+            { title: "Somewhere Only We Know", artist: "Keane", tags: 'R', decade: "2000" },
             { title: "Somewhere Over the Rainbow", artist: "Ariana Grande arr.", tags: 'A', decade: "Old" },
             { title: "Space Oddity", artist: "David Bowie", tags: 'D', decade: "1960" },
-            { title: "Stand By Me", artist: "Ben E. King", tags: 'B,D,N,R,S', decade: "1960" },
+            { title: "Stand By Me", artist: "Ben E. King", tags: 'D,N,R,S', decade: "1960" },
             { title: "Stay", artist: "Rihanna", tags: 'S', decade: "2010" },
-            { title: "Steal My Kisses", artist: "Ben Harper", tags: 'B', decade: "2000" },
-            { title: "Stick Season", artist: "Noah Kahan", tags: 'B', decade: "2020" },
-            { title: "Still Haven't Found", artist: "U2", tags: 'B,D,N,R,S', decade: "1980" },
-            { title: "Strawberry Wine", artist: "Deana Carter", tags: 'B,S', decade: "1990" },
-            { title: "Stressed Out", artist: "Twenty One Pilots", tags: 'B', decade: "2010" },
+            { title: "Steal My Kisses", artist: "Ben Harper", tags: '', decade: "2000" },
+            { title: "Stick Season", artist: "Noah Kahan", tags: '', decade: "2020" },
+            { title: "Still Haven't Found", artist: "U2", tags: 'D,N,R,SB', decade: "1980" },
+            { title: "Strawberry Wine", artist: "Deana Carter", tags: 'S', decade: "1990" },
+            { title: "Stressed Out", artist: "Twenty One Pilots", tags: '', decade: "2010" },
             { title: "Summer of 69", artist: "Bryan Adams", tags: 'D,R,S', decade: "1980" },
-            { title: "Sunday Morning", artist: "Maroon 5", tags: 'B,N', decade: "2000" },
+            { title: "Sunday Morning", artist: "Maroon 5", tags: 'N', decade: "2000" },
             { title: "Sunshine", artist: "Jonathan Edwards", tags: 'D', decade: "1970" },
             { title: "Sunshine On My Shoulders", artist: "John Denver", tags: 'D', decade: "1970" },
-            { title: "Sweeet Caroline", artist: "Neal Diamond", tags: 'B,D', decade: "1960" },
+            { title: "Sweeet Caroline", artist: "Neal Diamond", tags: 'D', decade: "1960" },
             { title: "Teach Your Children", artist: "Crosby, Stills, Nash & Young", tags: 'D,R', decade: "1960" },
-            { title: "Tennessee Whiskey", artist: "Chris Stapleton arr.", tags: 'B,R', decade: "2010" },
-            { title: "Tequila", artist: "Dan + Shay", tags: 'B,S', decade: "2010" },
-            { title: "That Thing You Do", artist: "The Oneders", tags: 'B,R', decade: "1990" },
+            { title: "Tennessee Whiskey", artist: "Chris Stapleton arr.", tags: 'R', decade: "2010" },
+            { title: "Tequila", artist: "Dan + Shay", tags: 'S', decade: "2010" },
+            { title: "That Thing You Do", artist: "The Oneders", tags: 'R', decade: "1990" },
             { title: "The Best Day", artist: "Taylor Swift", tags: 'S', decade: "2000" },
-            { title: "The Climb", artist: "Miley Cyrus", tags: 'B,R,S', decade: "2000" },
+            { title: "The Climb", artist: "Miley Cyrus", tags: 'R,S', decade: "2000" },
             { title: "The Driver's Song", artist: "John LT", tags: 'D,R', decade: "2010" },
-            { title: "the 1", artist: "Taylor Swift", tags: 'B,N,S', decade: "2020" },
+            { title: "the 1", artist: "Taylor Swift", tags: 'N,S', decade: "2020" },
             { title: "The Joke", artist: "Brandi Carlile", tags: 'R', decade: "2010" },
-            { title: "The Middle", artist: "Jimmy Eat World", tags: 'B,D,N,R,S', decade: "2000" },
-            { title: "The Only Exception", artist: "Paramore", tags: 'B,N', decade: "2000" },
+            { title: "The Middle", artist: "Jimmy Eat World", tags: 'D,N,R,S', decade: "2000" },
+            { title: "The Only Exception", artist: "Paramore", tags: 'N', decade: "2000" },
             { title: "The Story", artist: "Brandi Carlile", tags: 'R', decade: "2000" },
             { title: "The Way", artist: "Fastball", tags: 'D', decade: "1990" },
-            { title: "The Way You Make Me Feel", artist: "Michael Jackson", tags: 'B,R,S', decade: "1980" },
-            { title: "Thinking Out Loud", artist: "Ed Sheeran", tags: 'B,N,R,S', decade: "2010" },
+            { title: "The Way You Make Me Feel", artist: "Michael Jackson", tags: 'R,S', decade: "1980" },
+            { title: "Thinking Out Loud", artist: "Ed Sheeran", tags: 'N,R,S', decade: "2010" },
             { title: "Thinking Bout Love", artist: "Wild Rivers", tags: 'S', decade: "2020" },
-            { title: "This City", artist: "Sam Fischer", tags: 'B', decade: "2020" },
-            { title: "This Love", artist: "Maroon 5", tags: 'B', decade: "2000" },
+            { title: "This City", artist: "Sam Fischer", tags: '', decade: "2020" },
+            { title: "This Love", artist: "Maroon 5", tags: '', decade: "2000" },
             { title: "This One's For the Girls", artist: "Martina McBride", tags: 'S', decade: "2000" },
             { title: "This Town", artist: "Niall Horan", tags: 'D', decade: "2010" },
             { title: "Til You're Home", artist: "David Hodges (A Man Called Otto)", tags: 'D', decade: "2020" },
-            { title: "Till Forever Falls Apart", artist: "Ashe and Finneas", tags: 'B,N', decade: "2020" },
-            { title: "Time After Time", artist: "Cyndi Lauper", tags: 'B,R', decade: "1980" },
+            { title: "Till Forever Falls Apart", artist: "Ashe and Finneas", tags: 'N', decade: "2020" },
+            { title: "Time After Time", artist: "Cyndi Lauper", tags: 'R', decade: "1980" },
             { title: "Too Good at Goodbyes", artist: "Sam Smith", tags: '', decade: "2010" },
-            { title: "Torn", artist: "Natalie Imbruglia", tags: 'B,R,N', decade: "1990" },
+            { title: "Torn", artist: "Natalie Imbruglia", tags: 'R,N', decade: "1990" },
             { title: "Traitor", artist: "Olivia Rodrigo", tags: 'N,S', decade: "2021" },
-            { title: "Treacherous", artist: "Taylor Swift", tags: 'B,N,R,S', decade: "2010" },
-            { title: "Treasure", artist: "Bruno Mars", tags: 'B,N,S', decade: "2010" },
+            { title: "Treacherous", artist: "Taylor Swift", tags: 'N,R,S', decade: "2010" },
+            { title: "Treasure", artist: "Bruno Mars", tags: 'N,S', decade: "2010" },
             { title: "Two Tickets to Paradise", artist: "Eddie Money", tags: 'D', decade: "1970" },
-            { title: "Unaware", artist: "Allen Stone", tags: 'B', decade: "2010" },
-            { title: "Unlonely", artist: "Jason Mraz", tags: 'B', decade: "2010" },
-            { title: "Unwritten", artist: "Natasha Bedingfield", tags: 'B', decade: "2000" },
-            { title: "Valerie", artist: "Amy Winehouse and Mark Ronson", tags: 'B,N,R,S', decade: "2000" },
-            { title: "Vienna", artist: "Billy Joel", tags: 'B,R', decade: "1970" },
+            { title: "Unaware", artist: "Allen Stone", tags: '', decade: "2010" },
+            { title: "Unlonely", artist: "Jason Mraz", tags: '', decade: "2010" },
+            { title: "Unwritten", artist: "Natasha Bedingfield", tags: '', decade: "2000" },
+            { title: "Valerie", artist: "Amy Winehouse and Mark Ronson", tags: 'N,R,S', decade: "2000" },
+            { title: "Vienna", artist: "Billy Joel", tags: 'R', decade: "1970" },
             { title: "Ventura Highway", artist: "America", tags: 'D,R', decade: "1970" },
             { title: "Vineyard", artist: "Jackopierce", tags: 'D', decade: "1990" },
-            { title: "Waiting on the World to Change", artist: "John Mayer", tags: 'B,N', decade: "2000" },
+            { title: "Waiting on the World to Change", artist: "John Mayer", tags: 'N', decade: "2000" },
             { title: "Walking in Memphis", artist: "Marc Cohn", tags: 'D,R', decade: "1990" },
-            { title: "Walking on Sunshine", artist: "Katrina and the Waves", tags: 'B,R', decade: "1980" },
+            { title: "Walking on Sunshine", artist: "Katrina and the Waves", tags: 'R', decade: "1980" },
             { title: "Waterfalls", artist: "TLC", tags: 'R', decade: "1990" },
-            { title: "Watermellon Sugar", artist: "Harry Styles", tags: 'B', decade: "2010" },
+            { title: "Watermellon Sugar", artist: "Harry Styles", tags: '', decade: "2010" },
             { title: "We Belong", artist: "Pat Benatar", tags: 'R', decade: "1980" },
-            { title: "Weather", artist: "Lawrence", tags: 'B', decade: "2020" },
+            { title: "Weather", artist: "Lawrence", tags: '', decade: "2020" },
             { title: "What About Us?", artist: "Pink", tags: '', decade: "2010" },
-            { title: "What You Won't Do For Love", artist: "Bobby Caldwell", tags: 'D,R,S', decade: "1970" },
+            { title: "What You Won't Do For Love", artist: "Bobby Caldwell", tags: 'D,R,SB', decade: "1970" },
             { title: "What's Going On?", artist: "Marvin Gaye", tags: 'D,R', decade: "1970" },
             { title: "What's Up?", artist: "Four Non Blondes", tags: 'N,RToDo', decade: "1990" },
             { title: "When We Were Young", artist: "Adele", tags: 'A,S', decade: "2010" },
             { title: "White Liar", artist: "Miranda Lambert", tags: 'R', decade: "2000" },
-            { title: "Who Knew?", artist: "Pink", tags: 'B', decade: "2000" },
-            { title: "Who Says You Can't Go Home", artist: "Bon Jovi & Jennifer Nettles", tags: 'B', decade: "2000" },
-            { title: "Why'd You Only Call Me When You're High", artist: "Arctic Monkeys", tags: 'B', decade: "2010" },
+            { title: "Who Knew?", artist: "Pink", tags: '', decade: "2000" },
+            { title: "Who Says You Can't Go Home", artist: "Bon Jovi & Jennifer Nettles", tags: '', decade: "2000" },
+            { title: "Why'd You Only Call Me When You're High", artist: "Arctic Monkeys", tags: '', decade: "2010" },
             { title: "Wichita Lineman", artist: "Glen Campbell", tags: 'D', decade: "1960" },
             { title: "Wicked Game", artist: "Chris Isaak", tags: 'D', decade: "1980" },
             { title: "Wildfire", artist: "Michael Martin Murphey", tags: 'D', decade: "1970" },
             { title: "Wildflowers", artist: "Tom Petty", tags: 'D,R', decade: "1990" },
-            { title: "Will You Still Love Me Tomorrow", artist: "Carole King / The Shirelles", tags: 'B,N,R', decade: "1960" },
-            { title: "Wonderful Tonight", artist: "Eric Clapton", tags: 'D,R,S', decade: "1970" },
-            { title: "Wonderful World", artist: "Sam Cooke", tags: 'B,D,R,S', decade: "1960" },
+            { title: "Will You Still Love Me Tomorrow", artist: "Carole King / The Shirelles", tags: 'N,R', decade: "1960" },
+            { title: "Wonderful Tonight", artist: "Eric Clapton", tags: 'D,R,SB', decade: "1970" },
+            { title: "Wonderful World", artist: "Sam Cooke", tags: 'D,R,S', decade: "1960" },
             { title: "Wonderwall", artist: "Oasis", tags: 'D', decade: "1990" },
-            { title: "Yellow", artist: "Coldplay", tags: 'B,R,N,S', decade: "2000" },
+            { title: "Yellow", artist: "Coldplay", tags: 'R,N,S', decade: "2000" },
             { title: "Yes, I'm Ready", artist: "Barbara Mason", tags: 'D', decade: "1960" },
-            { title: "Yesterday", artist: "The Beatles", tags: 'B,D,N,R,S', decade: "1960" },
-            { title: "You and I", artist: "Lady Gaga", tags: 'B', decade: "2010" },
+            { title: "Yesterday", artist: "The Beatles", tags: 'D,N,R,S', decade: "1960" },
+            { title: "You and I", artist: "Lady Gaga", tags: '', decade: "2010" },
             { title: "You Are My Sunshine", artist: "Jimmy Davis", tags: 'D', decade: "Old" },
             { title: "You Can Probably Leave", artist: "Chris Stapleton", tags: 'D', decade: "2020" },
-            { title: "You Can't Always Get What You Want", artist: "Rolling Stones", tags: 'B', decade: "1960" },
-            { title: "You Get What You Give", artist: "New Radicals", tags: 'B,R', decade: "1990" },
-            { title: "You Go Down Smooth", artist: "Lake Street Dive", tags: 'B', decade: "2010" },
+            { title: "You Can't Always Get What You Want", artist: "Rolling Stones", tags: '', decade: "1960" },
+            { title: "You Get What You Give", artist: "New Radicals", tags: 'R', decade: "1990" },
+            { title: "You Go Down Smooth", artist: "Lake Street Dive", tags: '', decade: "2010" },
             { title: "You Know I'm No Good", artist: "Amy Winehouse", tags: 'N', decade: "2000" },
-            { title: "You May be Right", artist: "Billy Joel", tags: 'B,R', decade: "1980" },
+            { title: "You May be Right", artist: "Billy Joel", tags: 'R', decade: "1980" },
             { title: "You Say", artist: "Lauren Daigle", tags: 'R,S', decade: "2010" },
             { title: "You Were Meant for Me", artist: "Jewel", tags: 'RToDo', decade: "1990" },
             { title: "You Will Find Me", artist: "Andrew Ripp", tags: 'D', decade: "2000" },
             { title: "You're Still The One", artist: "Shania Twain", tags: 'S', decade: "1990" },
             { title: "Your Love", artist: "The Outfield", tags: 'RToDo', decade: "1980" },
             { title: "Your Song", artist: "Elton John", tags: 'D,R', decade: "1970" },
-            { title: "You've Got a Friend", artist: "James Taylor", tags: 'B,D', decade: "1970" }
+            { title: "You've Got a Friend", artist: "James Taylor", tags: 'D', decade: "1970" }
         ];
 
         $(function () {
@@ -498,33 +509,43 @@
             $('input[type=radio][name=radSinger]').change(function () {
                 if (this.value) {
                     $("#selDecade").val("");
+                    $("#selPartnerRole").val("");
                     let singerTag = this.value;
-                    populateSongList(singerTag, null);
+                    populateSongList(singerTag, null, null);
                 }
             });
 
             $('#aShowAll').click(function () {
                 $('input[type=radio][name=radSinger]').prop("checked", false);
                 $("#selDecade").val("");
-                populateSongList(null, null);
+                $("#selPartnerRole").val("");
+                populateSongList(null, null, null);
             });
 
             $('#chkByTitle').change(function () {
                 let singerTag = $("[type=radio][name=radSinger]:checked").val();
                 let decade = $("#selDecade").val();
-                populateSongList(singerTag, decade);
+                let partnerRole = $("#selPartnerRole").val();
+                populateSongList(singerTag, decade, partnerRole);
             });
 
             $('#selDecade').change(function () {
                 let decade = this.value;
                 let singerTag = $("[type=radio][name=radSinger]:checked").val();
-                populateSongList(singerTag, decade);
+                let partnerRole = $("#selPartnerRole").val();
+                populateSongList(singerTag, decade, partnerRole);
+            });
+
+            $('#selPartnerRole').change(function () {
+                let partnerRole = this.value;
+                let singerTag = $("[type=radio][name=radSinger]:checked").val();
+                let decade = $("#selDecade").val();
+                populateSongList(singerTag, decade, partnerRole);
             });
 
         });
 
-        function populateSongList(tag, decade) {
-
+        function populateSongList(tag, decade, partnerRole) {
             $("#ulSongs").empty();
 
             let byTitle = $("#chkByTitle").prop("checked");
@@ -553,20 +574,57 @@
                         }
                     }
                 } else {
-                    if (arrayContains(tags, "D") || (arrayContains(tags, tag))) {
-                        if ((!decade) || (decade == songDecade)) {
-                            if (!byTitle) {
-                                $("#ulSongs").append("<li><em>" + artist + "</em> -- " + titleAnchorTag + "</li>");
-                            } else {
-                                $("#ulSongs").append("<li>" + titleAnchorTag + " -- <em>" + artist + "</em></li>");
+                    if (! partnerRole) {
+
+                        if (arrayContains(tags, "D") || arrayContains(tags, tag)) {
+
+                            if ((!decade) || (decade == songDecade)) {
+                                if (!byTitle) {
+                                    $("#ulSongs").append("<li><em>" + artist + "</em> -- " + titleAnchorTag + "</li>");
+                                } else {
+                                    $("#ulSongs").append("<li>" + titleAnchorTag + " -- <em>" + artist + "</em></li>");
+                                }
+                            }
+                        }
+
+                    } else if (partnerRole == 'Lead') {
+
+                        if (arrayContains(tags, tag)) {
+
+                            if ((!decade) || (decade == songDecade)) {
+                                if (!byTitle) {
+                                    $("#ulSongs").append("<li><em>" + artist + "</em> -- " + titleAnchorTag + "</li>");
+                                } else {
+                                    $("#ulSongs").append("<li>" + titleAnchorTag + " -- <em>" + artist + "</em></li>");
+                                }
+                            }
+                        }
+
+                    } else if (partnerRole == 'BGV') {
+
+                        if (arrayContains(tags, tag + 'B')) {
+
+                            if ((!decade) || (decade == songDecade)) {
+                                if (!byTitle) {
+                                    $("#ulSongs").append("<li><em>" + artist + "</em> -- " + titleAnchorTag + "</li>");
+                                } else {
+                                    $("#ulSongs").append("<li>" + titleAnchorTag + " -- <em>" + artist + "</em></li>");
+                                }
                             }
                         }
                     }
                 }
             });
+
             $("#divInstructions").show();
-            $("#spanDecade").show();
-            $("#selDecade").show();
+            $("#divDecade").show();
+
+            let singerTag = $("[type=radio][name=radSinger]:checked").val();
+            if (singerTag != 'D') {
+                $("#divPartnerRole").show();
+            } else {
+                $("#divPartnerRole").hide();
+            }
         }
 
         function arrayContains(arr, val) {
