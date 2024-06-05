@@ -52,11 +52,11 @@
         <h1 id="title" style="float: left; margin-left: 9px;">Dave Weber Music Song List</h1>
     </div>
 
-    <div class="link-back" style="margin-bottom: 10px; margin-top: -5px">
+    <div class="link-back" style="margin-bottom: 10px; margin-top: -5px; margin-left: 50px;">
         <a href="https://davewebermusic.net">Back to davewebermusic.net</a>
     </div>
 
-    <div style="background-color: #F0F0F0; padding: 5px 5px 5px 5px; width: 430px;">
+    <div style="background-color: #F0F0F0; padding: 5px 5px 5px 5px;">
 
         <div id="divSingerFilters">
             <div class="singer" style="padding-bottom: 10px">
@@ -73,7 +73,7 @@
                 <label><input type="radio" name="radSinger" value="D"><em>Solo</em></label>
             </div>
 
-            <span class="instructions" id="spanShowEverything">Don't know who Dave's singing partner is? <a id="aShowAll" href="javascript:;" class="not-sure">Show everything.</a></span>
+            <span class="instructions" id="spanShowEverything">Don't know who she is? <a id="aShowAll" href="javascript:;" class="not-sure">Show everything.</a></span>
 
         </div>
 
@@ -87,40 +87,39 @@
         </div>
     </div>
 
-    <div id="divInstructions" style="display:none; margin-top: 8px; background-color: #E0F7FA; padding: 5px 5px 5px 5px;  width: 430px;" class="instructions">
-
-        <div><em><strong>Tipping is optional</strong> but always appreciated.</em></div>
-
-        <div style="margin-top: 5px;"><em>Click your favorite song to request it via your default email app.<em></div>
-
-        <div style="margin-top: 5px;">
+    <div id="divInstructions" style="display:none;" class="instructions">
+    
+        <div style="margin-top: 8px; background-color: #E0F7FA; padding: 5px 5px 5px 5px;">
+            <div><em>Click a favorite to request it via email.<em></div>
+            <div style="margin-top: 5px"><em><strong>Tipping is optional</strong> but always appreciated.</em></div>
+        </div>
+    
+        <div id="divSort" style="margin-top: 5px; margin-left: 23px">
             <label for="chkByTitle">Sort songs by <strong>title</strong></label>
             <input id="chkByTitle" type="checkbox" />
         </div>
+
     </div>
 
     <ol id="ulSongs" style="margin-top: 7px;" class="songs">
     </ol>
 
-    <div style="margin-top: 5px; background-color: #F0F0F0; padding: 5px 5px 5px 5px; width: 430px;" class="instructions">
-        <div id="divDecade" style="display:none;">
-            <span class="instructions">Filter by decade:</span>
-            <select id="selDecade">
-                <option value="">All decades</option>
-                <option value="2020">2020s</option>
-                <option value="2010">2010s</option>
-                <option value="2000">2000s</option>
-                <option value="1990">1990s</option>
-                <option value="1980">1980s</option>
-                <option value="1970">1970s</option>
-                <option value="1960">1960s</option>
-                <option value="1950">1950s</option>
-                <option value="Old">Really old</option>
-            </select>
-        </div>
-
+    <div id="divDecade" style="display:none; margin-top: 5px; background-color: #F0F0F0; padding: 5px 5px 5px 5px;" class="instructions">
+        <span class="instructions">Filter by decade:</span>
+        <select id="selDecade">
+            <option value="">All decades</option>
+            <option value="2020">2020s</option>
+            <option value="2010">2010s</option>
+            <option value="2000">2000s</option>
+            <option value="1990">1990s</option>
+            <option value="1980">1980s</option>
+            <option value="1970">1970s</option>
+            <option value="1960">1960s</option>
+            <option value="1950">1950s</option>
+            <option value="Old">Really old</option>
+        </select>
     </div>
-    
+
     <script>
 
         var songs = [
@@ -659,7 +658,7 @@
             switch (selectedSinger) {
                 case 'A':
                     titleText = 'Dave & Sabrina Song List';
-                    filterByRoleText = "Only show songs on which Sabrina sings";
+                    filterByRoleText = "Only show songs Sabrina sings";
                     break;
                 case 'D':                         
                     titleText = 'Dave Weber Music Song List';
@@ -668,23 +667,23 @@
                     break;
                 case 'I':
                     titleText = 'Dave & Arielle Song List';
-                    filterByRoleText = "Only show songs on which Arielle sings";
+                    filterByRoleText = "Only show songs Arielle sings";
                     break;
                 case 'N': 
                     titleText = 'Dave & Luna Song List';
-                    filterByRoleText = "Only show songs on which Luna sings";
+                    filterByRoleText = "Only show songs Luna sings";
                     break;
                 case 'R': 
                     titleText = 'Dave & Rebecca Song List';
-                    filterByRoleText = "Only show songs on which Rebecca sings";
+                    filterByRoleText = "Only show songs Rebecca sings";
                     break;
                 case 'S':
                     titleText = 'Selena & Dave Song List';
-                    filterByRoleText = "Only show songs on which Selena sings";
+                    filterByRoleText = "Only show songs Selena sings";
                     break;
                 case 'T': 
                     titleText = 'Dave & Sonia Song List';
-                    filterByRoleText = "Only show songs on which Sonia sings";
+                    filterByRoleText = "Only show songs Sonia sings";
                     break; 
             }
             $('#title').text(titleText);
