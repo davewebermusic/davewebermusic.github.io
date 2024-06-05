@@ -49,37 +49,51 @@
 <body>
     <div style="overflow:auto">
         <img style="float:left" src="DaveWeberMusicSocialMediaRedSquare.jpg" height="50px">
-        <h1 style="float: left; margin-left: 9px;">Dave Weber Music Song List</h1>
+        <h1 id="title" style="float: left; margin-left: 9px;">Dave Weber Music Song List</h1>
     </div>
 
-    <div style="padding-left: 80px;" class="link-back">
+    <div class="link-back" style="margin-bottom: 10px; margin-top: -5px">
         <a href="https://davewebermusic.net">Back to davewebermusic.net</a>
     </div>
 
-    <div class="singer" style="padding-bottom: 10px">
-        <div style="margin: 10px 0 5px 0">
-            <span class="select-singer">Select Dave's singing partner or choose <em>Solo</em>:</span>
+    <div style="background-color: #F0F0F0; padding: 5px 5px 5px 5px; width: 430px;">
+
+        <div id="divSingerFilters">
+            <div class="singer" style="padding-bottom: 10px">
+                <div style="margin: 5px 0 5px 0">
+                    <span class="select-singer">Select Dave's singing partner or choose <em>Solo</em>:</span>
+                </div>
+        
+                <label><input type="radio" name="radSinger" value="R">Rebecca</label>
+                <label><input type="radio" name="radSinger" value="S">Selena</label>
+                <label><input type="radio" name="radSinger" value="I">Arielle</label><br />
+                <label><input type="radio" name="radSinger" value="N">Luna</label>
+                <label><input type="radio" name="radSinger" value="T">Sonia</label>
+                <label><input type="radio" name="radSinger" value="A">Sabrina</label>
+                <label><input type="radio" name="radSinger" value="D"><em>Solo</em></label>
+            </div>
+
+            <span class="instructions" id="spanShowEverything">Don't know who Dave's singing partner is? <a id="aShowAll" href="javascript:;" class="not-sure">Show everything.</a></span>
+
         </div>
 
-        <label><input type="radio" name="radSinger" value="R">Rebecca</label>
-        <label><input type="radio" name="radSinger" value="S">Selena</label>
-        <label><input type="radio" name="radSinger" value="I">Arielle</label><br />
-        <label><input type="radio" name="radSinger" value="N">Luna</label>
-        <label><input type="radio" name="radSinger" value="T">Sonia</label>
-        <label><input type="radio" name="radSinger" value="A">Sabrina</label>
-        <label><input type="radio" name="radSinger" value="D"><em>Solo</em></label>
+        <div id="divPartnerRole" style="display:none;">
+            <span class="instructions" id="spanFilterbyPartnerRoleText"></span>
+            <select id="selPartnerRole">
+                <option value=""></option>
+                <option value="Lead">Lead vocals</option>
+                <option value="BGV">Background vocals</option>
+            </select>
+        </div>
     </div>
 
-    <div style="padding-left: 80px">
-        <a id="aShowAll" href="javascript:;" class="not-sure">Not sure? Show everything</a>
-    </div>
+    <div id="divInstructions" style="display:none; margin-top: 8px; background-color: #E0F7FA; padding: 5px 5px 5px 5px;  width: 430px;" class="instructions">
 
-    <div id="divInstructions" style="display:none;" class="instructions">
+        <div><em><strong>Tipping is optional</strong> but always appreciated.</em></div>
 
-        <p style="margin-bottom: 5px;">Click your favorite to request it via your <strong>email app</strong>. Note that the Yahoo email app may not work for this.<br />
-            <strong>Tipping is optional</strong> but always appreciated.</p>
+        <div style="margin-top: 5px;"><em>Click your favorite song to request it via your default email app.<em></div>
 
-        <div style="padding-left: 26px">
+        <div style="margin-top: 5px;">
             <label for="chkByTitle">Sort songs by <strong>title</strong></label>
             <input id="chkByTitle" type="checkbox" />
         </div>
@@ -88,10 +102,9 @@
     <ol id="ulSongs" style="margin-top: 7px;" class="songs">
     </ol>
 
-    
-    <div style="margin-top: 10px" class="instructions">
+    <div style="margin-top: 5px; background-color: #F0F0F0; padding: 5px 5px 5px 5px; width: 430px;" class="instructions">
         <div id="divDecade" style="display:none;">
-            <span>Filter by decade:</span>
+            <span class="instructions">Filter by decade:</span>
             <select id="selDecade">
                 <option value="">All decades</option>
                 <option value="2020">2020s</option>
@@ -106,14 +119,6 @@
             </select>
         </div>
 
-        <div id="divPartnerRole" style="display:none;">
-            <span>Filter by partner role:</span>
-            <select id="selPartnerRole">
-                <option value=""></option>
-                <option value="Lead">Lead vocals</option>
-                <option value="BGV">Background vocals</option>
-            </select>
-        </div>
     </div>
     
     <script>
@@ -592,6 +597,8 @@
                     $("#selPartnerRole").val("");
                     let singerTag = this.value;
                     populateSongList(singerTag, null, null);
+                    setPartnerName(singerTag);
+                    $("#spanShowEverything").hide();
                 }
             });
 
@@ -600,6 +607,8 @@
                 $("#selDecade").val("");
                 $("#selPartnerRole").val("");
                 populateSongList(null, null, null);
+                setPartnerName();
+                $("#spanShowEverything").hide();
             });
 
             $('#chkByTitle').change(function () {
@@ -623,7 +632,73 @@
                 populateSongList(singerTag, decade, partnerRole);
             });
 
+            var selectedSinger = getUrlParameter('singer');
+            if (selectedSinger !== null) {
+                $('#divSingerFilters').hide();
+                $("#spanShowEverything").hide();
+                var selector = 'input[type=radio][name=radSinger][value=' + selectedSinger + ']'
+                $(selector).prop('checked', true).trigger('change');
+                setPartnerName(selectedSinger);
+            }
+
         });
+
+        function setPartnerName(selectedSinger) {
+            var titleText = "";
+            var filterByRoleText = "";
+
+            if (! selectedSinger) {
+                titleText = 'Dave Weber Music Song List';
+                $('#title').text(titleText);
+                $('#divPartnerRole').hide();
+                return;
+            }
+
+            $('#divPartnerRole').show();
+
+            switch (selectedSinger) {
+                case 'A':
+                    titleText = 'Dave & Sabrina Song List';
+                    filterByRoleText = "Only show songs on which Sabrina sings";
+                    break;
+                case 'D':                         
+                    titleText = 'Dave Weber Music Song List';
+                    $("#selPartnerRole").val("");
+                    $('#divPartnerRole').hide();
+                    break;
+                case 'I':
+                    titleText = 'Dave & Arielle Song List';
+                    filterByRoleText = "Only show songs on which Arielle sings";
+                    break;
+                case 'N': 
+                    titleText = 'Dave & Luna Song List';
+                    filterByRoleText = "Only show songs on which Luna sings";
+                    break;
+                case 'R': 
+                    titleText = 'Dave & Rebecca Song List';
+                    filterByRoleText = "Only show songs on which Rebecca sings";
+                    break;
+                case 'S':
+                    titleText = 'Selena & Dave Song List';
+                    filterByRoleText = "Only show songs on which Selena sings";
+                    break;
+                case 'T': 
+                    titleText = 'Dave & Sonia Song List';
+                    filterByRoleText = "Only show songs on which Sonia sings";
+                    break; 
+            }
+            $('#title').text(titleText);
+            $('#spanFilterbyPartnerRoleText').text(filterByRoleText);
+        }
+
+        function getUrlParameter(name) {
+            // Use a regex to find the parameter in the query string
+            var regex = new RegExp('[?&]' + name + '=([^&#]*)');
+            var results = regex.exec(window.location.search);
+
+            // If the parameter is found, return its value, else return null
+            return results === null ? null : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
 
         function populateSongList(tag, decade, partnerRole) {
             $("#ulSongs").empty();
