@@ -118,9 +118,71 @@
             <option value="1950">1950s</option>
             <option value="Old">Really old</option>
         </select>
+
+        <div id="divShowOtherSingers" style="display: none; margin-top: 5px;"><a id="aShowOtherSingers" href="javascript:;" class="not-sure">Show Dave's other singing partners</a></div>
     </div>
 
     <script>
+
+        var gigs = [
+            { gigDate: "06/05/2024", singer: "R" },
+            { gigDate: "06/07/2024", singer: "T" },
+            { gigDate: "06/08/2024", singer: "R" },
+            { gigDate: "06/13/2024", singer: "T" },
+            { gigDate: "06/14/2024", singer: "T" },
+            { gigDate: "06/21/2024", singer: "S" },
+            { gigDate: "07/12/2024", singer: "S" },
+            { gigDate: "07/13/2024", singer: "T" },
+            { gigDate: "07/18/2024", singer: "N" },
+            { gigDate: "07/19/2024", singer: "" },
+            { gigDate: "07/20/2024", singer: "I" },
+            { gigDate: "07/24/2024", singer: "A" },
+            { gigDate: "07/25/2024", singer: "S" },
+            { gigDate: "07/26/2024", singer: "T" },
+            { gigDate: "07/27/2024", singer: "S" },
+            { gigDate: "07/31/2024", singer: "S" },
+            { gigDate: "08/02/2024", singer: "I" },
+            { gigDate: "08/03/2024", singer: "R" },
+            { gigDate: "08/08/2024", singer: "" },
+            { gigDate: "08/16/2024", singer: "S" },
+            { gigDate: "08/17/2024", singer: "S" },
+            { gigDate: "08/23/2024", singer: "" },
+            { gigDate: "08/24/2024", singer: "T" },
+            { gigDate: "08/30/2024", singer: "R" },
+            { gigDate: "08/31/2024", singer: "" },
+            { gigDate: "09/06/2024", singer: "" },
+            { gigDate: "09/07/2024", singer: "" },
+            { gigDate: "09/13/2024", singer: "" },
+            { gigDate: "09/14/2024", singer: "" },
+            { gigDate: "09/20/2024", singer: "" },
+            { gigDate: "09/21/2024", singer: "" },
+            { gigDate: "09/27/2024", singer: "" },
+            { gigDate: "09/28/2024", singer: "" },
+            { gigDate: "10/04/2024", singer: "" },
+            { gigDate: "10/05/2024", singer: "" },
+            { gigDate: "10/11/2024", singer: "" },
+            { gigDate: "10/12/2024", singer: "" },
+            { gigDate: "10/18/2024", singer: "" },
+            { gigDate: "10/19/2024", singer: "" },
+            { gigDate: "10/25/2024", singer: "" },
+            { gigDate: "10/26/2024", singer: "" },
+            { gigDate: "11/01/2024", singer: "" },
+            { gigDate: "11/02/2024", singer: "" },
+            { gigDate: "11/08/2024", singer: "" },
+            { gigDate: "11/09/2024", singer: "" },
+            { gigDate: "11/15/2024", singer: "" },
+            { gigDate: "11/16/2024", singer: "" },
+            { gigDate: "11/22/2024", singer: "" },
+            { gigDate: "11/30/2024", singer: "" },
+            { gigDate: "12/01/2024", singer: "" },
+            { gigDate: "12/06/2024", singer: "" },
+            { gigDate: "12/07/2024", singer: "" },
+            { gigDate: "12/12/2024", singer: "" },
+            { gigDate: "12/13/2024", singer: "" },
+            { gigDate: "12/20/2024", singer: "" },
+            { gigDate: "12/21/2024", singer: "" },
+            { gigDate: "12/27/2024", singer: "" }
+        ];
 
         var songs = [
             { title: "1985", artist: "Bowling for Soup", tags: 'S', decade: "2000" },
@@ -631,14 +693,26 @@
                 populateSongList(singerTag, decade, partnerRole);
             });
 
-            var selectedSinger = getUrlParameter('singer');
-            if (selectedSinger !== null) {
+            $('#aShowOtherSingers').click(function() {
+                $('#divSingerFilters').show();
+                $('#aShowOtherSingers').hide();
+            });
+
+            let selectedSinger = getUrlParameter('singer');
+            if (! selectedSinger) {
+                selectedSinger = getTodaysSinger();
+                if (selectedSinger) {
+                    $("#divShowOtherSingers").show();
+                }
+            }
+
+            if (selectedSinger) {
                 $('#divSingerFilters').hide();
                 $("#spanShowEverything").hide();
-                var selector = 'input[type=radio][name=radSinger][value=' + selectedSinger + ']'
+                let selector = 'input[type=radio][name=radSinger][value=' + selectedSinger + ']'
                 $(selector).prop('checked', true).trigger('change');
                 setPartnerName(selectedSinger);
-            }
+            } 
 
         });
 
@@ -773,8 +847,8 @@
             $("#divInstructions").show();
             $("#divDecade").show();
 
-            let singerTag = $("[type=radio][name=radSinger]:checked").val();
-            if (singerTag != 'D') {
+            let singer = $("[type=radio][name=radSinger]:checked").val();
+            if (singer != 'D') {
                 $("#divPartnerRole").show();
             } else {
                 $("#divPartnerRole").hide();
@@ -798,6 +872,39 @@
                 return str.substring(2);
             }
             return str;
+        }
+
+        function getCurrentDateFormatted() {
+            // Get the current date
+            const date = new Date();
+
+            // Get the month, day, and year
+            let month = date.getMonth() + 1; // Months are zero-based
+            let day = date.getDate();
+            const year = date.getFullYear();
+
+            // Add leading zeros if necessary
+            if (month < 10) {
+                month = '0' + month;
+            }
+            if (day < 10) {
+                day = '0' + day;
+            }
+
+            // Format the date as MM/DD/YYYY
+            const formattedDate = `${month}/${day}/${year}`;
+            return formattedDate;
+        }
+
+        function getTodaysSinger() {
+            var formattedDate = getCurrentDateFormatted();
+
+            var matchingGigs = gigs.filter(g => g.gigDate == formattedDate);
+            if (! matchingGigs) {
+                return null;
+            }
+
+            return matchingGigs[0].singer;
         }
 
     </script>
