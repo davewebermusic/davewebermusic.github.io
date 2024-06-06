@@ -164,7 +164,7 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span id="myModalClose" class="close">&times;</span>
-            <p>If you have an email program, it will open in ten seconds so you can submit your song request. If not, then feel free to make your request verbally.</p>
+            <p>If you have an email program, it will open shortly so you can submit your song request. If not, then feel free to make your request verbally.</p>
             <p>
                 We encourage you to submit multiple requests. We wlil try to pick one that best fits the vibe of the venue. Thank you.
             </p>
@@ -947,10 +947,13 @@
                 // Show the modal
                 modal.show();
 
+                alert("Setting timer;");
+
                 // Allow the default mailto action to proceed after a delay
                 setTimeout(() => {
+                    alert("Times up");
                     window.location.href = $(this).attr('href');
-                }, 10000); 
+                }, 8000); 
             });
 
         }
