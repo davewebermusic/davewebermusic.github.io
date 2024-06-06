@@ -155,7 +155,7 @@
     </ol>
 
     <div style="background-color: #F0F0F0; padding: 5px 5px 5px 5px;" class="instructions">
-        <div id="divShowOtherSingers" style="display: none;"><a id="aShowOtherSingers" href="javascript:;">Show Dave's other singing partners</a></div>
+        <div id="divShowOtherSingers" style="display: none;"><a id="aShowOtherSingers" href="javascript:;">Show all of Dave's singing partners</a></div>
 
         <span id="spanShowEverything"><a id="aShowAll" href="javascript:;">Show Dave's full song list across all singers</a></span>
     </div>
@@ -193,10 +193,11 @@
         <div class="modal-content">
             <span id="allSongsModalClose" class="close">&times;</span>
             <h4 style="text-align: center;">Showing all songs</h4>
-            <p>Dave has multiple singing partners. We are now showing all of the songs Dave's knows across all of them.
-                This includes songs that cannot be performed today.
+            <p>Dave has multiple singing partners. We are now showing all of the songs Dave knows across all of them.</p>
+            <p>
+               If you reached this page while at one of Dave's gigs, note that this list includes songs that cannot be performed in this gig.
+               It's best if you limit your song requests to ones that can be performed today.
             </p>
-            <p>When submitting song requests, it is preferred to limit your selections to the songs can be performed today.</p>
         </div>
     </div>
 
@@ -741,6 +742,7 @@
                     let singerTag = this.value;
                     populateSongList(singerTag, null, null);
                     setPartnerName(singerTag);
+                    $("#spanShowEverything").show();
                 }
             });
 
