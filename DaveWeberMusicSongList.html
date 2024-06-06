@@ -168,6 +168,7 @@
             <p>
                 We encourage you to submit multiple requests. We wlil try to pick one that best fits the vibe of the venue. Thank you.
             </p>
+            <p>if your email program does not open automatically, <a id="aOpenMailNow" href="javascript:;" >open it now.</a></p>
         </div>
     </div>
 
@@ -943,13 +944,17 @@
             $('a[href^="mailto:"]').click(function(event) {
                 // Prevent the default action temporarily
                 event.preventDefault();
+                
+                let href = $(this).attr('href');
+
+                $("#aOpenMailNow").attr('href', href);
 
                 // Show the modal
                 modal.show();
 
                 // Allow the default mailto action to proceed after a delay
                 setTimeout(() => {
-                    window.location.href = $(this).attr('href');
+                    window.location.href = href;
                 }, 8000); 
             });
 
