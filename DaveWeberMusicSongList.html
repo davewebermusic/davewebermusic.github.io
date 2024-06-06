@@ -947,11 +947,8 @@
                 // Show the modal
                 modal.show();
 
-                alert("Setting timer;");
-
                 // Allow the default mailto action to proceed after a delay
                 setTimeout(() => {
-                    alert("Times up");
                     window.location.href = $(this).attr('href');
                 }, 8000); 
             });
