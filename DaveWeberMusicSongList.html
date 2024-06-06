@@ -66,7 +66,7 @@
             border: 1px solid #888;
             width: 80%;
             max-width: 600px;
-            text-align: center;
+            text-align: left;
         }
 
         .close {
@@ -163,8 +163,23 @@
 
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>If you have an email program, it will open shortly to submit your song request.</p>
+            <span id="myModalClose" class="close">&times;</span>
+            <p>If you have an email program, it will open in ten seconds so you can submit your song request. If not, then feel free to make your request verbally.</p>
+            <p>
+                We encourage you to submit multiple requests. We wlil try to pick one that best fits the vibe of the venue. Thank you.
+            </p>
+        </div>
+    </div>
+
+    <div id="tippingModal" class="modal">
+        <div class="modal-content">
+            <span id="tippingModalClose" class="close">&times;</span>
+            <p><strong>Tipping is optional</strong>. If you would like to leave an electronic tip (no amount is too small), click your preferred service below:</p>
+            <ul>
+                <li><a href="https://davewebermusic.github.io/DaveWeberMusicVenmo.html">Venmo</a></li>
+                <li><a href="https://paypal.me/DaveWeberMusic">PayPal</a></li>
+                <li><a href="https://cash.app/$DaveWeberMusic">CashApp</a></li>
+            </ul>
         </div>
     </div>
 
@@ -760,23 +775,24 @@
                 setPartnerName(selectedSinger);
             } 
 
+            // Email modal and close span
             var modal = $('#myModal');
+            var span = $('#myModalClose');
 
-            // Get the <span> element that closes the modal
-            var span = $('.close');
+            // Tipping modal and close span
+            var tippingModal = $('#tippingModal');
+            var tippingSpan = $('#tippingModalClose');
 
-            // When the user clicks on <span> (x), close the modal
+            // When the user clicks the close span in the email modal
             span.click(function() {
                 modal.hide();
+                tippingModal.show();
             });
 
-            // When the user clicks anywhere outside of the modal, close it
-            $(window).click(function(event) {
-                if ($(event.target).is(modal)) {
-                    modal.hide();
-                }
-            })
-
+            // When the user clisks the close span in the tipping modal
+             tippingSpan.click(function() {
+                tippingModal.hide();
+            });
 
         });
 
@@ -934,7 +950,7 @@
                 // Allow the default mailto action to proceed after a delay
                 setTimeout(() => {
                     window.location.href = $(this).attr('href');
-                }, 2000); // 2-second delay
+                }, 10000); 
             });
 
         }
