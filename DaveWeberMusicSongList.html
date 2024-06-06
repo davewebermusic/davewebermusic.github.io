@@ -67,6 +67,7 @@
             width: 80%;
             max-width: 600px;
             text-align: left;
+            font-size: 15px;
         }
 
         .close {
@@ -164,11 +165,11 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span id="myModalClose" class="close">&times;</span>
-            <p>If you have an email program, it will open shortly so you can submit your song request. If not, then feel free to make your request verbally.</p>
-            <p>
-                We encourage you to submit multiple requests. We wlil try to pick one that best fits the vibe of the venue. Thank you.
-            </p>
-            <p>if your email program does not open automatically, <a id="aOpenMailNow" href="javascript:;" >open it now.</a></p>
+            <p>We encourage you to submit multiple requests. We wlil try to pick one that best fits the vibe of the venue.</p>
+
+            <p>If you have an email program, it should open automaticlaly in a few seconds. If it doesn't, then click <a id="aOpenMailNow" href="javascript:;" >open my email program now.</a></p>
+
+            <p>If you get stuck, feel to write the song title on a napkin or just request it verbally.</p>
         </div>
     </div>
 
@@ -181,6 +182,7 @@
                 <li><a href="https://paypal.me/DaveWeberMusic">PayPal</a></li>
                 <li><a href="https://cash.app/$DaveWeberMusic">CashApp</a></li>
             </ul>
+            <p><a id="aNotNow" href="javascript:;">Not now</a>
         </div>
     </div>
 
@@ -776,22 +778,25 @@
                 setPartnerName(selectedSinger);
             } 
 
-            // Email modal and close span
+            // Email modal
             var modal = $('#myModal');
-            var span = $('#myModalClose');
 
-            // Tipping modal and close span
+            // Tipping modal
             var tippingModal = $('#tippingModal');
-            var tippingSpan = $('#tippingModalClose');
 
             // When the user clicks the close span in the email modal
-            span.click(function() {
+            $('#myModalClose').click(function() {
                 modal.hide();
                 tippingModal.show();
             });
 
             // When the user clisks the close span in the tipping modal
-             tippingSpan.click(function() {
+            $('#tippingModalClose').click(function() {
+                tippingModal.hide();
+            });
+
+            // When the user clisks the Not Now in the tipping modal
+            $('#aNotNow').click(function() {
                 tippingModal.hide();
             });
 
