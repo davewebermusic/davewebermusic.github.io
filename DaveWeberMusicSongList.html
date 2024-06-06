@@ -123,7 +123,7 @@
         </div>
 
         <div id="divDecade"  style="display: none; margin-top: 5px;">
-            <span>Filter by decade:</span>
+            <span>Filter by decade (optional):</span>
             <select id="selDecade">
                 <option value=""></option>
                 <option value="2020">2020s</option>
@@ -144,9 +144,10 @@
     
         <div style="margin-top: 8px; background-color: #E0F7FA; padding: 5px 5px 5px 5px;">
 
-            <div id="divDaveSoloSongsShown" style="padding-bottom: 5px;"><em>* The below list also includes songs that Dave performs solo. To omit these, use the role filter above.</em></div>
+            <div style="padding-bottom: 8px;"><em>Click a favorite to request it via email.<em></div>
 
-            <div><em>Click a favorite to request it via email.<em></div>
+            <div id="divDaveSoloSongsShown" ><em>* The below list also includes songs that Dave performs solo. To omit these, use the role filter above.</em></div>
+
         </div>
     
         <div id="divSort" style="margin-top: 5px; margin-left: 23px">
@@ -874,7 +875,7 @@
             switch (selectedSinger) {
                 case 'A':
                     titleText = 'Dave & Sabrina Song List';
-                    filterByRoleText = "Filter by Sabrina's role";
+                    filterByRoleText = "Filter by Sabrina's role (optional):";
                     break;
                 case 'D':                         
                     titleText = 'Dave Weber Solo Song List';
@@ -883,23 +884,23 @@
                     break;
                 case 'I':
                     titleText = 'Dave & Arielle Song List';
-                    filterByRoleText = "Filter by Arielle's role";
+                    filterByRoleText = "Filter by Arielle's role (optional):";
                     break;
                 case 'N': 
                     titleText = 'Dave & Luna Song List';
-                    filterByRoleText = "Filter by Luna's role";
+                    filterByRoleText = "Filter by Luna's role (optional):";
                     break;
                 case 'R': 
                     titleText = 'Dave & Rebecca Song List';
-                    filterByRoleText = "Filter by Rebecca's role";
+                    filterByRoleText = "Filter by Rebecca's role (optional):";
                     break;
                 case 'S':
                     titleText = 'Selena & Dave Song List';
-                    filterByRoleText = "Filter by Selena's role";
+                    filterByRoleText = "Filter by Selena's role (optional):";
                     break;
                 case 'T': 
                     titleText = 'Dave & Sonia Song List';
-                    filterByRoleText = "Filter by Sonia's role";
+                    filterByRoleText = "Filter by Sonia's role (optional):";
                     break; 
             }
             $('#title').text(titleText);
