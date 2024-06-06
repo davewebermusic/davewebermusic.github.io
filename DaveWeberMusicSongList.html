@@ -29,10 +29,6 @@
             font-size: 15px;
         }
 
-        .not-sure {
-            font-size: 15px;
-        }
-
         .songs {
             font-size: 14px;
         }
@@ -96,7 +92,7 @@
         <a href="https://davewebermusic.net">Back to davewebermusic.net</a>
     </div>
 
-    <div style="background-color: #F0F0F0; padding: 5px 5px 5px 5px;">
+    <div style="background-color: #F0F0F0; padding: 5px 5px 5px 5px;" class="instructions">
 
         <div id="divSingerFilters">
             <div class="singer" style="padding-bottom: 10px">
@@ -113,8 +109,6 @@
                 <label><input type="radio" name="radSinger" value="D"><em>Solo</em></label>
             </div>
 
-            <span class="instructions" id="spanShowEverything">Don't know who she is? <a id="aShowAll" href="javascript:;" class="not-sure">Show everything</a></span>
-
         </div>
 
         <div id="divPartnerRole" style="display:none;">
@@ -125,13 +119,29 @@
                 <option value="BGV">Backup</option>
             </select>
         </div>
-    </div>
+
+        <div id="divDecade"  style="display: none; margin-top: 5px;">
+            <span class="instructions">Filter by decade:</span>
+            <select id="selDecade">
+                <option value="">All decades</option>
+                <option value="2020">2020s</option>
+                <option value="2010">2010s</option>
+                <option value="2000">2000s</option>
+                <option value="1990">1990s</option>
+                <option value="1980">1980s</option>
+                <option value="1970">1970s</option>
+                <option value="1960">1960s</option>
+                <option value="1950">1950s</option>
+                <option value="Old">Really old</option>
+            </select>
+        </div>
+
+     </div>
 
     <div id="divInstructions" style="display:none;" class="instructions">
     
         <div style="margin-top: 8px; background-color: #E0F7FA; padding: 5px 5px 5px 5px;">
             <div><em>Click a favorite to request it via email.<em></div>
-            <div style="margin-top: 5px"><em><strong>Tipping is optional</strong> but always appreciated.</em></div>
         </div>
     
         <div id="divSort" style="margin-top: 5px; margin-left: 23px">
@@ -144,52 +154,56 @@
     <ol id="ulSongs" style="margin-top: 7px;" class="songs">
     </ol>
 
-    <div id="divDecade" style="display:none; margin-top: 5px; background-color: #F0F0F0; padding: 5px 5px 5px 5px;" class="instructions">
-        <span class="instructions">Filter by decade:</span>
-        <select id="selDecade">
-            <option value="">All decades</option>
-            <option value="2020">2020s</option>
-            <option value="2010">2010s</option>
-            <option value="2000">2000s</option>
-            <option value="1990">1990s</option>
-            <option value="1980">1980s</option>
-            <option value="1970">1970s</option>
-            <option value="1960">1960s</option>
-            <option value="1950">1950s</option>
-            <option value="Old">Really old</option>
-        </select>
+    <div style="background-color: #F0F0F0; padding: 5px 5px 5px 5px;" class="instructions">
+        <div id="divShowOtherSingers" style="display: none;"><a id="aShowOtherSingers" href="javascript:;">Show Dave's other singing partners</a></div>
 
-        <div id="divShowOtherSingers" style="display: none; margin-top: 5px;"><a id="aShowOtherSingers" href="javascript:;" class="not-sure">Show Dave's other singing partners</a></div>
+        <span id="spanShowEverything"><a id="aShowAll" href="javascript:;">Show Dave's full song list across all singers</a></span>
     </div>
 
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span id="myModalClose" class="close">&times;</span>
-            <p>We encourage you to submit multiple requests. We wlil try to pick one that best fits the vibe of the venue.</p>
+            <h4 style="text-align: center;">Launching email to submit your request...</h4>
 
-            <p>If you have an email program, it should open automaticlaly in a few seconds. If it doesn't, then click <a id="aOpenMailNow" href="javascript:;" >open my email program now.</a></p>
+            <p>Song requests are submitted via email. If you have an email program, it should open automatically in a few seconds. If it doesn't, then click <a id="aOpenMailNow" href="javascript:;" >open my email program now.</a></p>
 
-            <p>If you get stuck, feel to write the song title on a napkin or just request it verbally.</p>
+            <p>If you don't have an email program or get stuck, feel to write the song title on a napkin or just request it verbally.</p>
+
+            <p>Feel free to submit multiple requests. We will try to pick one that best fits the vibe.</p>
         </div>
     </div>
 
     <div id="tippingModal" class="modal">
         <div class="modal-content">
             <span id="tippingModalClose" class="close">&times;</span>
-            <p><strong>Tipping is optional</strong>. If you would like to leave an electronic tip (no amount is too small), click your preferred service below:</p>
+            <h4 style="text-align: center;">Feely tipsy?</h4>
+            <p>Some listeners like to send in a tip along with their song requests. If you'd like to leave an electronic tip (no amount is too small),
+                click your preferred service below.</p>
+            <p>Note that tipping is entirely optional. We gladly welcome your requests either way. 
+                And if you submit multiple requests, please only tip once.</p>
             <ul>
                 <li><a href="https://davewebermusic.github.io/DaveWeberMusicVenmo.html">Venmo</a></li>
                 <li><a href="https://paypal.me/DaveWeberMusic">PayPal</a></li>
                 <li><a href="https://cash.app/$DaveWeberMusic">CashApp</a></li>
             </ul>
-            <p><a id="aNotNow" href="javascript:;">Not now</a>
+        </div>
+    </div>
+
+    <div id="allSongsModal" class="modal">
+        <div class="modal-content">
+            <span id="allSongsModalClose" class="close">&times;</span>
+            <h4 style="text-align: center;">Showing all songs</h4>
+            <p>Dave has multiple singing partners. We are now showing all of the songs Dave's knows across all of them.
+                This includes songs that cannot be performed today.
+            </p>
+            <p>When submitting song requests, it is preferred to limit your selections to the songs can be performed today.</p>
         </div>
     </div>
 
     <script>
 
         var gigs = [
-            { gigDate: "06/05/2024", singer: "R" },
+            { gigDate: "06/06/2024", singer: "R" },
             { gigDate: "06/07/2024", singer: "T" },
             { gigDate: "06/08/2024", singer: "R" },
             { gigDate: "06/13/2024", singer: "T" },
@@ -716,6 +730,10 @@
 
         $(function () {
 
+            var modal = $('#myModal');
+            var tippingModal = $('#tippingModal');
+            var allSongsModal = $('#allSongsModal');
+
             $('input[type=radio][name=radSinger]').change(function () {
                 if (this.value) {
                     $("#selDecade").val("");
@@ -723,7 +741,6 @@
                     let singerTag = this.value;
                     populateSongList(singerTag, null, null);
                     setPartnerName(singerTag);
-                    $("#spanShowEverything").hide();
                 }
             });
 
@@ -734,6 +751,8 @@
                 populateSongList(null, null, null);
                 setPartnerName();
                 $("#spanShowEverything").hide();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                allSongsModal.show();
             });
 
             $('#chkByTitle').change(function () {
@@ -760,44 +779,42 @@
             $('#aShowOtherSingers').click(function() {
                 $('#divSingerFilters').show();
                 $('#aShowOtherSingers').hide();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
             let selectedSinger = getUrlParameter('singer');
-            if (! selectedSinger) {
+            if (selectedSinger) {
+                // Since a parameter was passed, hide the fact that Dave performs with other singers
+                $("#divShowOtherSingers").hide();
+                $("#spanShowEverything").hide();
+            }
+            else {
                 selectedSinger = getTodaysSinger();
                 if (selectedSinger) {
+                    // We will show information for today's singer but give opportunity to show others too
                     $("#divShowOtherSingers").show();
+                    $("#spanShowEverything").show();
                 }
             }
 
             if (selectedSinger) {
                 $('#divSingerFilters').hide();
-                $("#spanShowEverything").hide();
                 let selector = 'input[type=radio][name=radSinger][value=' + selectedSinger + ']'
                 $(selector).prop('checked', true).trigger('change');
                 setPartnerName(selectedSinger);
             } 
 
-            // Email modal
-            var modal = $('#myModal');
-
-            // Tipping modal
-            var tippingModal = $('#tippingModal');
-
-            // When the user clicks the close span in the email modal
             $('#myModalClose').click(function() {
                 modal.hide();
                 tippingModal.show();
             });
 
-            // When the user clisks the close span in the tipping modal
             $('#tippingModalClose').click(function() {
                 tippingModal.hide();
             });
 
-            // When the user clisks the Not Now in the tipping modal
-            $('#aNotNow').click(function() {
-                tippingModal.hide();
+            $('#allSongsModalClose').click(function() {
+                allSongsModal.hide();
             });
 
         });
@@ -818,7 +835,7 @@
             switch (selectedSinger) {
                 case 'A':
                     titleText = 'Dave & Sabrina Song List';
-                    filterByRoleText = "Only show songs that Sabrina sings";
+                    filterByRoleText = "Only show songs on which Sabrina sings";
                     break;
                 case 'D':                         
                     titleText = 'Dave Weber Music Song List';
@@ -827,23 +844,23 @@
                     break;
                 case 'I':
                     titleText = 'Dave & Arielle Song List';
-                    filterByRoleText = "Only show songs that Arielle sings";
+                    filterByRoleText = "Only show songs on which Arielle sings";
                     break;
                 case 'N': 
                     titleText = 'Dave & Luna Song List';
-                    filterByRoleText = "Only show songs that Luna sings";
+                    filterByRoleText = "Only show songs on which Luna sings";
                     break;
                 case 'R': 
                     titleText = 'Dave & Rebecca Song List';
-                    filterByRoleText = "Only show songs that Rebecca sings";
+                    filterByRoleText = "Only show songs on which Rebecca sings";
                     break;
                 case 'S':
                     titleText = 'Selena & Dave Song List';
-                    filterByRoleText = "Only show songs that Selena sings";
+                    filterByRoleText = "Only show songs on which Selena sings";
                     break;
                 case 'T': 
                     titleText = 'Dave & Sonia Song List';
-                    filterByRoleText = "Only show songs that Sonia sings";
+                    filterByRoleText = "Only show songs on which Sonia sings";
                     break; 
             }
             $('#title').text(titleText);
@@ -960,7 +977,7 @@
                 // Allow the default mailto action to proceed after a delay
                 setTimeout(() => {
                     window.location.href = href;
-                }, 8000); 
+                }, 10000); 
             });
 
         }
@@ -1010,7 +1027,8 @@
             var formattedDate = getCurrentDateFormatted();
 
             var matchingGigs = gigs.filter(g => g.gigDate == formattedDate);
-            if (! matchingGigs) {
+
+            if (matchingGigs.length == 0) {
                 return null;
             }
 
