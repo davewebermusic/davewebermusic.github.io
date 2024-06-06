@@ -737,6 +737,8 @@
             { title: "You've Got a Friend", artist: "James Taylor", tags: 'D', decade: "1970" }
         ];
 
+        var timeoutId = null;
+
         $(function () {
 
             var modal = $('#myModal');
@@ -810,6 +812,14 @@
                 $('#divSingerFilters').show();
                 $('#aShowOtherSingers').hide();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            $("#aOpenMailNow").click(function() {
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                    timeoutId = null;
+                }
+                // Since we didn't prevent the default behavior, this will continue to open the email app.
             });
 
             let selectedSinger = getUrlParameter('singer');
@@ -1021,7 +1031,7 @@
                 modal.show();
 
                 // Allow the default mailto action to proceed after a delay
-                setTimeout(() => {
+                timeoutId = setTimeout(() => {
                     window.location.href = href;
                 }, 10000); 
             });
