@@ -138,9 +138,9 @@
     
         <div style="margin-top: 8px; background-color: #E0F7FA; padding: 5px 5px 5px 5px;">
 
-            <div style="padding-bottom: 8px;"><em>Click a favorite to request it via email.<em></div>
+            <div id="divDaveSoloSongsShown" style="padding-bottom: 8px;"><em>* Identifies a song Dave performs solo</em></div>
 
-            <div id="divDaveSoloSongsShown" ><em>* Identifies a song Dave performs solo</em></div>
+            <div><em>Click a favorite to request it via email.<em></div>
 
         </div>
     
@@ -177,11 +177,13 @@
 
             <p>Song requests are submitted via email. To proceed, click <a id="aOpenMailNow" href="javascript:;" >open my email app.</a> We will fill in the email subject and body for you.</p>
 
-            <p>If you don't have an email app or you get stuck, use a napkin or just tell us verbally.</p>
+            <p>If you don't have an email app or you get stuck, use a napkin or make your request verbally.</p>
 
-            <p>After you send the email, return here (to your browser) to make additional selections. We'll try to pick one that best fits the vibe.</p>
+            <p>After you send the email, return here to your browser to make additional selections. We'll try to pick one that best fits the vibe.</p>
 
-            <p id="pIfYouPickedASoloSong">If you chose a song that Dave does solo, he might elect to save it for a solo gig.</p>
+            <p id="pIfYouPickedASoloSong">
+                Note that you picked a song that Dave does solo. Since he has a singing partner today, he will limit the number of songs he performs solo.
+             </p>
         </div>
     </div>
 
@@ -763,10 +765,8 @@
 
                     if (singerTag != 'D') {
                         $("#divDaveSoloSongsShown").show();
-                        $("#pIfYouPickedASoloSong").show();
                     } else {
                         $("#divDaveSoloSongsShown").hide();
-                        $("#pIfYouPickedASoloSong").hide();
                     }
                 }
             });
@@ -804,10 +804,8 @@
                 populateSongList(singerTag, decade, partnerRole, hideSolo);
                 if (partnerRole || hideSolo) {
                     $("#divDaveSoloSongsShown").hide();
-                    $("#pIfYouPickedASoloSong").hide();
                 } else {
                     $("#divDaveSoloSongsShown").show();
-                    $("#pIfYouPickedASoloSong").show();
                 }
             });
 
@@ -819,10 +817,8 @@
                 populateSongList(singerTag, decade, partnerRole, hideSolo);
                 if (partnerRole || hideSolo) {
                     $("#divDaveSoloSongsShown").hide();
-                    $("#pIfYouPickedASoloSong").hide();
                 } else {
                     $("#divDaveSoloSongsShown").show();
-                    $("#pIfYouPickedASoloSong").show();
                 }
             });
 
@@ -842,7 +838,6 @@
                     // Special case: show all songs and hide filters
                     $('#divSingerFilters').hide();
                     $("#divDaveSoloSongsShown").hide();
-                    $("#pIfYouPickedASoloSong").hide();
                     populateSongList(null, null, null, false);
                     setPartnerName();
                     selectedSinger = null;
@@ -980,6 +975,7 @@
                             }
                         } else if ((! hideSolo) && arrayContains(tags, "D")) {
                             if ((!decade) || (decade == songDecade)) {
+                                titleAnchorTag = titleAnchorTag.replace("&body", "%20*&body");
                                 if (!byTitle) {
                                     $("#ulSongs").append("<li><em>" + artist + "</em> -- " + titleAnchorTag + " *</li>");
                                 } else {
@@ -1040,6 +1036,12 @@
                 event.preventDefault();
                 
                 let href = $(this).attr('href');
+
+                if (href.includes("%20*")) {
+                    $("#pIfYouPickedASoloSong").show();
+                } else {
+                    $("#pIfYouPickedASoloSong").hide();
+                }
 
                 $("#aOpenMailNow").attr('href', href);
 
