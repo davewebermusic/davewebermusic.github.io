@@ -109,17 +109,6 @@
                 <label><input type="radio" name="radSinger" value="A">Sabrina</label>
                 <label><input type="radio" name="radSinger" value="D"><em>Solo</em></label>
             </div>
-
-        </div>
-
-        <div id="divPartnerRole" style="display:none;">
-            <span id="spanFilterbyPartnerRoleText"></span>
-            <select id="selPartnerRole">
-                <option value=""></option>
-                <option value="Lead">Lead</option>
-                <option value="BGV">Backup</option>
-            </select>
-            vocals
         </div>
 
         <div id="divDecade"  style="display: none; margin-top: 5px;">
@@ -138,6 +127,11 @@
             </select>
         </div>
 
+        <div id="divHideSolo" style="margin-top: 5px; display:none;">
+            <label for="chkHideSolo">Hide Dave's solo songs</label>
+            <input id="chkHideSolo" type="checkbox" />
+        </div>
+
      </div>
 
     <div id="divInstructions" style="display:none;" class="regular-text">
@@ -146,7 +140,7 @@
 
             <div style="padding-bottom: 8px;"><em>Click a favorite to request it via email.<em></div>
 
-            <div id="divDaveSoloSongsShown" ><em>* The below list also includes songs that Dave performs solo. To omit these, use the role filter above.</em></div>
+            <div id="divDaveSoloSongsShown" ><em>* Identifies a song Dave performs solo</em></div>
 
         </div>
     
@@ -164,20 +158,30 @@
         <div id="divShowOtherSingers" style="display: none;"><a id="aShowOtherSingers" href="javascript:;">Show all of Dave's singing partners</a></div>
 
         <span id="spanShowEverything"><a id="aShowAll" href="javascript:;">Show Dave's full song list across all singers</a></span>
+
+        <div id="divPartnerRole" style="display:none;">
+            <span id="spanFilterbyPartnerRoleText"></span>
+            <select id="selPartnerRole">
+                <option value=""></option>
+                <option value="Lead">Lead</option>
+                <option value="BGV">Backup</option>
+            </select>
+            vocals
+        </div>
     </div>
 
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span id="myModalClose" class="close">&times;</span>
-            <h3 style="text-align: center;">Launching your email app...</h3>
+            <h3 style="text-align: center;">Opening your email app...</h3>
 
-            <p>Song requests are submitted via email. If you have an email app, it should open automatically in a few seconds. If it doesn't, then click <a id="aOpenMailNow" href="javascript:;" >open my email app now.</a></p>
+            <p>Song requests are submitted via email. To proceed, click <a id="aOpenMailNow" href="javascript:;" >open my email app.</a> We will fill in the email subject and body for you.</p>
 
-            <p>If you don't have an email app or you get stuck, use a napkin (or your lungs).</p>
+            <p>If you don't have an email app or you get stuck, use a napkin or just tell us verbally.</p>
 
-            <p>Feel free to submit multiple requests. We'll try to pick one that best fits the vibe.</p>
+            <p>After you send the email, return here (to your browser) to make additional selections. We'll try to pick one that best fits the vibe.</p>
 
-            <p id="pIfYouPickedASoloSong">If you picked a song that Dave does solo, he might elect to save it for a solo gig.</p>
+            <p id="pIfYouPickedASoloSong">If you chose a song that Dave does solo, he might elect to save it for a solo gig.</p>
         </div>
     </div>
 
@@ -212,7 +216,6 @@
     <script>
 
         var gigs = [
-            { gigDate: "06/06/2024", singer: "R" },
             { gigDate: "06/07/2024", singer: "T" },
             { gigDate: "06/08/2024", singer: "R" },
             { gigDate: "06/13/2024", singer: "T" },
@@ -738,8 +741,6 @@
             { title: "You've Got a Friend", artist: "James Taylor", tags: 'D', decade: "1970" }
         ];
 
-        var timeoutId = null;
-
         $(function () {
 
             var modal = $('#myModal');
@@ -751,7 +752,7 @@
                     $("#selDecade").val("");
                     $("#selPartnerRole").val("");
                     let singerTag = this.value;
-                    populateSongList(singerTag, null, null);
+                    populateSongList(singerTag, null, null, $("#chkHideSolo").prop("checked"));
                     setPartnerName(singerTag);
 
                     if (! getUrlParameter('singer')) {
@@ -774,7 +775,7 @@
                 $('input[type=radio][name=radSinger]').prop("checked", false);
                 $("#selDecade").val("");
                 $("#selPartnerRole").val("");
-                populateSongList(null, null, null);
+                populateSongList(null, null, null, false);
                 setPartnerName();
                 $("#spanShowEverything").hide();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -785,22 +786,38 @@
                 let singerTag = $("[type=radio][name=radSinger]:checked").val();
                 let decade = $("#selDecade").val();
                 let partnerRole = $("#selPartnerRole").val();
-                populateSongList(singerTag, decade, partnerRole);
+                populateSongList(singerTag, decade, partnerRole, $("#chkHideSolo").prop("checked"));
             });
 
             $('#selDecade').change(function () {
                 let decade = this.value;
                 let singerTag = $("[type=radio][name=radSinger]:checked").val();
                 let partnerRole = $("#selPartnerRole").val();
-                populateSongList(singerTag, decade, partnerRole);
+                populateSongList(singerTag, decade, partnerRole, $("#chkHideSolo").prop("checked"));
             });
 
             $('#selPartnerRole').change(function () {
                 let partnerRole = this.value;
                 let singerTag = $("[type=radio][name=radSinger]:checked").val();
                 let decade = $("#selDecade").val();
-                populateSongList(singerTag, decade, partnerRole);
-                if (partnerRole) {
+                let hideSolo = $("#chkHideSolo").prop("checked");
+                populateSongList(singerTag, decade, partnerRole, hideSolo);
+                if (partnerRole || hideSolo) {
+                    $("#divDaveSoloSongsShown").hide();
+                    $("#pIfYouPickedASoloSong").hide();
+                } else {
+                    $("#divDaveSoloSongsShown").show();
+                    $("#pIfYouPickedASoloSong").show();
+                }
+            });
+
+            $('#chkHideSolo').change(function () {
+                let partnerRole = $("#selPartnerRole").val();
+                let singerTag = $("[type=radio][name=radSinger]:checked").val();
+                let decade = $("#selDecade").val();
+                let hideSolo = $("#chkHideSolo").prop("checked");
+                populateSongList(singerTag, decade, partnerRole, hideSolo);
+                if (partnerRole || hideSolo) {
                     $("#divDaveSoloSongsShown").hide();
                     $("#pIfYouPickedASoloSong").hide();
                 } else {
@@ -815,14 +832,6 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            $("#aOpenMailNow").click(function() {
-                if (timeoutId) {
-                    clearTimeout(timeoutId);
-                    timeoutId = null;
-                }
-                // Since we didn't prevent the default behavior, this will continue to open the email app.
-            });
-
             let selectedSinger = getUrlParameter('singer');
             if (selectedSinger) {
                 // Since a parameter was passed, hide the fact that Dave performs with other singers
@@ -834,7 +843,7 @@
                     $('#divSingerFilters').hide();
                     $("#divDaveSoloSongsShown").hide();
                     $("#pIfYouPickedASoloSong").hide();
-                    populateSongList(null, null, null);
+                    populateSongList(null, null, null, false);
                     setPartnerName();
                     selectedSinger = null;
                 }
@@ -878,10 +887,12 @@
                 titleText = 'Dave Weber Music Song List';
                 $('#title').text(titleText);
                 $('#divPartnerRole').hide();
+                $('#divHideSolo').hide();
                 return;
             }
 
             $('#divPartnerRole').show();
+            $('#divHideSolo').show();
 
             switch (selectedSinger) {
                 case 'A':
@@ -892,6 +903,7 @@
                     titleText = 'Dave Weber Solo Song List';
                     $("#selPartnerRole").val("");
                     $('#divPartnerRole').hide();
+                    $('#divHideSolo').hide();
                     break;
                 case 'I':
                     titleText = 'Dave & Arielle Song List';
@@ -927,7 +939,8 @@
             return results === null ? null : decodeURIComponent(results[1].replace(/\+/g, ' '));
         }
 
-        function populateSongList(tag, decade, partnerRole) {
+        function populateSongList(tag, decade, partnerRole, hideSolo) {
+
             $("#ulSongs").empty();
 
             let byTitle = $("#chkByTitle").prop("checked");
@@ -965,7 +978,7 @@
                                     $("#ulSongs").append("<li>" + titleAnchorTag + " -- <em>" + artist + "</em></li>");
                                 }
                             }
-                        } else if (arrayContains(tags, "D")) {
+                        } else if ((! hideSolo) && arrayContains(tags, "D")) {
                             if ((!decade) || (decade == songDecade)) {
                                 if (!byTitle) {
                                     $("#ulSongs").append("<li><em>" + artist + "</em> -- " + titleAnchorTag + " *</li>");
@@ -1010,8 +1023,10 @@
             let singer = $("[type=radio][name=radSinger]:checked").val();
             if ((! singer) || (singer == 'D')) {
                 $("#divPartnerRole").hide();
+                $('#divHideSolo').hide();
             } else {
                 $("#divPartnerRole").show();
+                $('#divHideSolo').show();
             }
 
             // Set up handler for the mailto links
@@ -1031,10 +1046,6 @@
                 // Show the modal
                 modal.show();
 
-                // Allow the default mailto action to proceed after a delay
-                timeoutId = setTimeout(() => {
-                    window.location.href = href;
-                }, 10000); 
             });
 
         }
