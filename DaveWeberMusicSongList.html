@@ -177,10 +177,14 @@
 
             <p>Song requests are submitted via email. Click <a id="aOpenMailNow" href="javascript:;" >open my email app</a> to have the song title filled in automatically. If you don't have an email app, just request the song verbally.</p>
 
-            <p>After sending the email, make sure to return back here (to your browser) to <a id="aMakeAdditional" href="javascript:;">make additional selections</a> and/or <a id="aLeaveATip" href="javascript:;">leave a tip.</a></p>
+            <p>After sending the email, make sure to return back here (to your browser) to 
+                <ul>
+                    <li><a id="aMakeAdditional" href="javascript:;">Make additional selections</a></li>
+                    <li><a id="aLeaveATip" href="javascript:;">Leave a tip (optional).</a></li>
+                </ul>
 
             <p id="pIfYouPickedASoloSong">
-                You picked a song that Dave does solo. Since he has a singing partner today, he will limit the number of songs he performs solo.
+                Note that you picked a song that Dave does solo. Since he has a singing partner today, he will limit the number of songs he performs solo.
              </p>
         </div>
     </div>
@@ -741,6 +745,8 @@
             { title: "You've Got a Friend", artist: "James Taylor", tags: 'D', decade: "1970" }
         ];
 
+        var didWeAskForATipYet = false;
+
         $(function () {
 
             var modal = $('#myModal');
@@ -859,17 +865,24 @@
 
             $('#myModalClose').click(function() {
                 modal.hide();
-                tippingModal.show();
+                if (! didWeAskForATipYet) {
+                    didWeAskForATipYet = true;
+                    tippingModal.show();
+                }
             });
 
             $('#aLeaveATip').click(function() {
                 modal.hide();
+                didWeAskForATipYet = true;
                 tippingModal.show();
             });
 
             $('#aMakeAdditional').click(function() {
                 modal.hide();
-                tippingModal.show();
+                if (! didWeAskForATipYet) {
+                    didWeAskForATipYet = true;
+                    tippingModal.show();
+                }
             });
 
             $('#tippingModalClose').click(function() {
