@@ -175,14 +175,12 @@
             <span id="myModalClose" class="close">&times;</span>
             <h3 style="text-align: center;">Opening your email app...</h3>
 
-            <p>Song requests are submitted via email. To proceed, click <a id="aOpenMailNow" href="javascript:;" >open my email app.</a> We will fill in the email subject and body for you.</p>
+            <p>Song requests are submitted via email. Click <a id="aOpenMailNow" href="javascript:;" >open my email app</a> to have the song title filled in automatically. If you don't have an email app, just request the song verbally.</p>
 
-            <p>If you don't have an email app or you get stuck, use a napkin or make your request verbally.</p>
-
-            <p>After you send the email, return here to your browser to make additional selections. We'll try to pick one that best fits the vibe.</p>
+            <p>After sending the email, make sure to return back here (to your browser) to <a id="aMakeAdditional" href="javascript:;">make additional selections</a> and/or <a id="aLeaveATip" href="javascript:;">leave a tip.</a></p>
 
             <p id="pIfYouPickedASoloSong">
-                Note that you picked a song that Dave does solo. Since he has a singing partner today, he will limit the number of songs he performs solo.
+                You picked a song that Dave does solo. Since he has a singing partner today, he will limit the number of songs he performs solo.
              </p>
         </div>
     </div>
@@ -860,6 +858,16 @@
             } 
 
             $('#myModalClose').click(function() {
+                modal.hide();
+                tippingModal.show();
+            });
+
+            $('#aLeaveATip').click(function() {
+                modal.hide();
+                tippingModal.show();
+            });
+
+            $('#aMakeAdditional').click(function() {
                 modal.hide();
                 tippingModal.show();
             });
