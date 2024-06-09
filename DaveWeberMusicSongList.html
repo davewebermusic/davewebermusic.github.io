@@ -156,9 +156,9 @@
     </ol>
 
     <div style="background-color: #F0F0F0; padding: 5px 5px 5px 5px;" class="regular-text">
-        <div id="divShowOtherSingers" style="display: none;"><a id="aShowOtherSingers" href="javascript:;">Show all of Dave's singing partners</a></div>
+        <div id="divShowOtherSingers" style="display: none; padding-bottom: 5px;"><a id="aShowOtherSingers" href="javascript:;">Show all of Dave's singing partners</a></div>
 
-        <span id="spanShowEverything"><a id="aShowAll" href="javascript:;">Show Dave's full song list across all singers</a></span>
+        <div id="divShowEverything" style="padding-bottom: 5px;"><a id="aShowAll" href="javascript:;">Show Dave's full song list across all singers</a></div>
 
         <div id="divPartnerRole" style="display:none;">
             <span id="spanFilterbyPartnerRoleText"></span>
@@ -221,7 +221,7 @@
     <script>
 
         var gigs = [
-            { gigDate: "06/09/2024", singer: "T", noTip: "true", venue: "ACME" },
+            { gigDate: "06/09/2024", singer: "T", noTip: "false", venue: "ACME" },
             { gigDate: "06/13/2024", singer: "T", noTip: "false", venue: "The Turn House" },
             { gigDate: "06/14/2024", singer: "T", noTip: "false", venue: "Java Nation N. Bethesda" },
             { gigDate: "06/19/2024", singer: "", noTip: "false", venue: "The Creek Lodge" },
@@ -767,7 +767,7 @@
                     if (! getUrlParameter('singer')) {
                         // As long as a parameter doesn't constrain the page from knowing about other or all singers, we want to allow
                         // the user to choose to show all songs
-                        $("#spanShowEverything").show();
+                        $("#divShowEverything").show();
                     }
 
                     if (singerTag != 'D') {
@@ -784,7 +784,7 @@
                 $("#selPartnerRole").val("");
                 populateSongList(null, null, null, false);
                 setPartnerName();
-                $("#spanShowEverything").hide();
+                $("#divShowEverything").hide();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 allSongsModal.show();
             });
@@ -844,7 +844,11 @@
             if (selectedSinger) {
                 // Since a parameter was passed, hide the fact that Dave performs with other singers
                 $("#divShowOtherSingers").hide();
-                $("#spanShowEverything").hide();
+                $("#divShowEverything").hide();
+
+                // Don'g show the venue greeting because a parameter was passed and it just happens
+                // to be a gig day
+                $("#divVenueGreeting").hide();
 
                 if (selectedSinger == 'ALL') {
                     // Special case: show all songs and hide filters
@@ -860,7 +864,7 @@
                 if (selectedSinger) {
                     // We will show information for today's singer but give opportunity to show others too
                     $("#divShowOtherSingers").show();
-                    $("#spanShowEverything").show();
+                    $("#divShowEverything").show();
                 }
             }
 
@@ -1122,7 +1126,7 @@
             return formattedDate;
         }
 
-        function getTodaysSinger() {
+        function getTodaysGigRecord() {
             var formattedDate = getCurrentDateFormatted();
 
             var matchingGigs = gigs.filter(g => g.gigDate == formattedDate);
@@ -1131,33 +1135,42 @@
                 return null;
             }
 
-            return matchingGigs[0].singer;
+            return matchingGigs[0];
+        }
+
+        function getTodaysSinger() {
+
+            var gig = getTodaysGigRecord();
+
+            if (! gig) {
+                return null;
+            }
+
+            return gig.singer;
         }
 
         function isTodayANoTipGig() {
 
-            var formattedDate = getCurrentDateFormatted();
+            var gig = getTodaysGigRecord();
 
-            var matchingGigs = gigs.filter(g => g.gigDate == formattedDate);
-
-            if (matchingGigs.length == 0) {
+            if (! gig) {
                 return false;
             }
 
-            return matchingGigs[0].noTip.toLowerCase() == "true";
+            return gig.noTip.toLowerCase() == "true";
         }
 
         function setVenueIfTodayIsAGig() {
-            var formattedDate = getCurrentDateFormatted();
 
-            var matchingGigs = gigs.filter(g => g.gigDate == formattedDate);
+            var gig = getTodaysGigRecord();
 
-            if (matchingGigs.length == 1 && matchingGigs[0].venue) {
-                $('#spanVenue').text(matchingGigs[0].venue);
+            if (gig && gig.venue) {
+                $('#spanVenue').text(gig.venue);
                 $('#divVenueGreeting').show();
                 return
             }
         }
+
     </script>
 </body>
 </html>
