@@ -785,6 +785,7 @@
                 populateSongList(null, null, null, false);
                 setPartnerName();
                 $("#divShowEverything").hide();
+                $("#divDaveSoloSongsShown").show();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 allSongsModal.show();
             });
@@ -853,7 +854,7 @@
                 if (selectedSinger == 'ALL') {
                     // Special case: show all songs and hide filters
                     $('#divSingerFilters').hide();
-                    $("#divDaveSoloSongsShown").hide();
+                    $("#divDaveSoloSongsShown").show();
                     populateSongList(null, null, null, false);
                     setPartnerName();
                     selectedSinger = null;
@@ -989,12 +990,22 @@
                 let titleAnchorTag = "<a href='mailto:DaveWeberMusic@gmail.com?subject=Song%20request:%20" + encodeURIComponent(title).replace(/'/g, "%27") + "&body=Please%20play%20" + encodeURIComponent(title).replace(/'/g, "%27") + "%20by%20" + encodeURIComponent(artist).replace(/'/g, "%27") + ".'>" + title + "</a>";
 
                 if (!tag) {
+                    let onlyDaveSings = doesOnlyDaveSing(tags);
                     if ((!decade) || (decade == songDecade)) {
                         if (!byTitle) {
+                            if (onlyDaveSings) {
+                                $("#ulSongs").append("<li><em>" + artist + "</em> -- " + titleAnchorTag + " *</li>");
+                            }
+                            else {
                             $("#ulSongs").append("<li><em>" + artist + "</em> -- " + titleAnchorTag + "</li>");
+                            }
+                        } else {
+                            if (onlyDaveSings) {
+                                $("#ulSongs").append("<li>" + titleAnchorTag + " * -- <em>" + artist + "</em></li>");
                         } else {
                             $("#ulSongs").append("<li>" + titleAnchorTag + " -- <em>" + artist + "</em></li>");
                         }
+                    }
                     }
                 } else {
                     if (! partnerRole) {
@@ -1083,6 +1094,29 @@
 
             });
 
+        }
+
+        function doesOnlyDaveSing(tags) {
+            if (! arrayContains(tags, "D")) {
+                return false;
+            }
+
+            for (var i = 0; i < tags.length; i++) {
+                let tag = tags[i];
+                if (tag == "D") {
+                    continue;
+                }
+                if (tag.length < 2) {
+                    // Some singer other than Dave sings this one
+                    return false;
+                }
+                if (tag.charAt(1) != 'B') {
+                    // This shouldn't happen
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         function arrayContains(arr, val) {
