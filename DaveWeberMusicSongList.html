@@ -247,6 +247,7 @@
             { gigDate: "12/18/2024", singer: "K", noTip: "false", venue: "The Clarks Lodge" },
             { gigDate: "12/20/2024", singer: "S", noTip: "false", venue: "Windrige Vineyards" },
             { gigDate: "12/21/2024", singer: "", noTip: "false", venue: "The Clarks Lodge" },
+            { gigDate: "12/26/2024", singer: "", noTip: "false", venue: "The Rumor Meal" },
             { gigDate: "12/27/2024", singer: "W", noTip: "false", venue: "Vanish Farmwoods Brewery" },
             { gigDate: "12/28/2024", singer: "S", noTip: "false", venue: "The Blind Pig Tavern" }
         ];
@@ -786,6 +787,7 @@
                 setPartnerName();
                 $("#divShowEverything").hide();
                 $("#divDaveSoloSongsShown").show();
+                $("#divHideSolo").show();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 allSongsModal.show();
             });
@@ -822,6 +824,7 @@
                 let singerTag = $("[type=radio][name=radSinger]:checked").val();
                 let decade = $("#selDecade").val();
                 let hideSolo = $("#chkHideSolo").prop("checked");
+
                 populateSongList(singerTag, decade, partnerRole, hideSolo);
                 if (partnerRole || hideSolo) {
                     $("#divDaveSoloSongsShown").hide();
@@ -995,21 +998,23 @@
 
                 if (!tag) {
                     let onlyDaveSings = doesOnlyDaveSing(tags);
-                    if ((!decade) || (decade == songDecade)) {
-                        if (!byTitle) {
-                            if (onlyDaveSings) {
-                                $("#ulSongs").append("<li><em>" + artist + "</em> -- " + titleAnchorTag + " *</li>");
+                    if (! (onlyDaveSings && hideSolo)) {
+                        if ((!decade) || (decade == songDecade)) {
+                            if (!byTitle) {
+                                if (onlyDaveSings) {
+                                    $("#ulSongs").append("<li><em>" + artist + "</em> -- " + titleAnchorTag + " *</li>");
+                                }
+                                else {
+                                $("#ulSongs").append("<li><em>" + artist + "</em> -- " + titleAnchorTag + "</li>");
+                                }
+                            } else {
+                                if (onlyDaveSings) {
+                                    $("#ulSongs").append("<li>" + titleAnchorTag + " * -- <em>" + artist + "</em></li>");
+                                } else {
+                                    $("#ulSongs").append("<li>" + titleAnchorTag + " -- <em>" + artist + "</em></li>");
+                                }
                             }
-                            else {
-                            $("#ulSongs").append("<li><em>" + artist + "</em> -- " + titleAnchorTag + "</li>");
-                            }
-                        } else {
-                            if (onlyDaveSings) {
-                                $("#ulSongs").append("<li>" + titleAnchorTag + " * -- <em>" + artist + "</em></li>");
-                        } else {
-                            $("#ulSongs").append("<li>" + titleAnchorTag + " -- <em>" + artist + "</em></li>");
                         }
-                    }
                     }
                 } else {
                     if (! partnerRole) {
@@ -1065,9 +1070,12 @@
             $("#divDecade").show();
 
             let singer = $("[type=radio][name=radSinger]:checked").val();
-            if ((! singer) || (singer == 'D')) {
+
+            if (singer == 'D') {
                 $("#divPartnerRole").hide();
                 $('#divHideSolo').hide();
+            } else if (! singer) {
+                $("#divPartnerRole").hide();
             } else {
                 $("#divPartnerRole").show();
                 $('#divHideSolo').show();
