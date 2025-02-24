@@ -852,18 +852,14 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // Some gigs are sensitive and we don't want to solicit tips
-            omitTips = isTodayANoTipGig();
-
-            setVenueIfTodayIsAGig();
-
             let selectedSinger = getUrlParameter('singer');
+
             if (selectedSinger) {
                 // Since a parameter was passed, hide the fact that Dave performs with other singers
                 $("#divShowOtherSingers").hide();
                 $("#divShowEverything").hide();
 
-                // Don'g show the venue greeting because a parameter was passed and it just happens
+                // Don't show the venue greeting because a parameter was passed and it just happens
                 // to be a gig day
                 $("#divVenueGreeting").hide();
 
@@ -874,9 +870,17 @@
                     populateSongList(null, null, null, false);
                     setPartnerName();
                     selectedSinger = null;
+                } else if (selectedSinger == 'LIST') {
+                    // Ignore whether there is a gig today. Always show all the singers
+                    selectedSinger = null;
+                    $("#divShowEverything").show();
                 }
             }
             else {
+                // Some gigs are sensitive and we don't want to solicit tips
+                omitTips = isTodayANoTipGig();
+
+                setVenueIfTodayIsAGig();
                 selectedSinger = getTodaysSinger();
                 if (selectedSinger) {
                     // We will show information for today's singer but give opportunity to show others too
