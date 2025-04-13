@@ -223,10 +223,12 @@
 
     <script>
 
-        var gigs = [
-            { gigDate: "04/12/2025", singer: "A", noTip: "false", venue: "The Clarks Lodge" },
+        var gigs = [,
             { gigDate: "04/13/2025", singer: "N", noTip: "false", venue: "Waredaca Brewing Co" },
-            { gigDate: "04/23/2025", singer: "D", noTip: "false", venue: "The Carnegie" },
+            { gigDate: "04/19/2025", singer: "S", noTip: "false", venue: "Olney Station", startHour: 0, endHour: 17 },
+            { gigDate: "04/19/2025", singer: "T", noTip: "false", venue: "Gentleman Jim's", startHour: 18, endHour: 23 },
+            { gigDate: "04/23/2025", singer: "D", noTip: "false", venue: "Sunrise Bethesda", startHour: 0, endHour: 16  },
+            { gigDate: "04/23/2025", singer: "D", noTip: "false", venue: "The Carnegie", startHour: 18, endHour: 23 },
             { gigDate: "04/25/2025", singer: "T", noTip: "false", venue: "Java Nation N. Bethesda" },
             { gigDate: "04/26/2025", singer: "S", noTip: "false", venue: "The Office Bar & Grill" },
             { gigDate: "04/27/2025", singer: "R", noTip: "false", venue: "Two Story Chimney Ciderworks" }
@@ -1192,12 +1194,24 @@
         }
 
         function getTodaysGigRecord() {
+
             var formattedDate = getCurrentDateFormatted();
 
             var matchingGigs = gigs.filter(g => g.gigDate == formattedDate);
 
-            if (matchingGigs.length == 0) {
+             if (matchingGigs.length == 0) {
                 return null;
+            }
+
+            if (matchingGigs.length > 1) {
+                // More than one gig in a day. Use the hour range to pick the right one
+
+                var currentHour = new Date().getHours();
+                matchingGigs = matchingGigs.filter(g => g.startHour <= currentHour && currentHour < g.endHour);
+
+                if (matchingGigs.length != 1) {
+                    return null;
+                }
             }
 
             return matchingGigs[0];
