@@ -82,6 +82,23 @@
             cursor: pointer;
         }
 
+        .link-button {
+            display: inline-block;
+            background-color: #0000EE;
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px #000099;
+            font-size: 14px;
+            transition: all 0.1s ease-in-out;
+        }
+
+        .link-button:active {
+            box-shadow: 0 2px #000099;
+            transform: translateY(2px);
+        }
+
     </style>
 </head>
 <body>
@@ -177,9 +194,15 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span id="myModalClose" class="close">&times;</span>
-            <h3 style="text-align: center;">Opening your email app...</h3>
+            <h3 style="text-align: center;">Let's open your email app...</h3>
 
-            <p>Song requests are submitted via email. Click <a id="aOpenMailNow" href="javascript:;" >open my email app</a> to have the song title filled in automatically. If you don't have an email app, just request the song verbally.</p>
+            <p>Song requests are submitted via email. We will fill in the song title for you when you click this button.</p>
+
+            <ul style="list-style-type: none;">
+                <li><a id="aOpenMailNow" href="javascript:;" class="link-button">Open Email App</a></li>
+            </ul>
+
+            <p>If you don't have an email program, just request the song verbally.</p>
 
             <p>After sending the email, make sure to return back here (to your browser) to 
                 <ul>
