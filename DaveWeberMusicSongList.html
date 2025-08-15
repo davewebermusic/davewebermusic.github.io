@@ -130,7 +130,7 @@
                 <label><input type="radio" name="radSinger" value="W">Anna</label>
                 <!-- label><input type="radio" name="radSinger" value="Z">Marissa</label -->
                 <label><input type="radio" name="radSinger" value="D"><em>Solo</em></label>
-                <label style="display: none"><input type="radio" name="radSinger" value="C"><em>Acoustic</em></label>
+                <label><input type="radio" name="radSinger" value="C"><em>Solo acoustic</em></label>
             </div>
         </div>
 
@@ -827,7 +827,7 @@
                         $("#divShowEverything").show();
                     }
 
-                    if (singerTag != 'D') {
+                    if (singerTag != 'D' && singerTag != 'C') {
                         $("#divDaveSoloSongsShown").show();
                     } else {
                         $("#divDaveSoloSongsShown").hide();
@@ -1046,7 +1046,6 @@
         }
 
         function populateSongList(tag, decade, partnerRole, hideSolo) {
-
             $("#ulSongs").empty();
 
             let byTitle = $("#chkByTitle").prop("checked");
@@ -1087,6 +1086,7 @@
                         }
                     }
                 } else {
+
                     if (! partnerRole) {
                         if (arrayContains(tags, tag) || arrayContains(tags, tag + "B")) {
                             if ((!decade) || (decade == songDecade)) {
@@ -1096,7 +1096,7 @@
                                     $("#ulSongs").append("<li>" + titleAnchorTag + " -- <em>" + artist + "</em></li>");
                                 }
                             }
-                        } else if ((! hideSolo) && arrayContains(tags, "D")) {
+                        } else if ((tag != 'C') && (! hideSolo) && arrayContains(tags, "D")) {
                             if ((!decade) || (decade == songDecade)) {
                                 titleAnchorTag = titleAnchorTag.replace("&body", "%20*&body");
                                 if (!byTitle) {
@@ -1141,7 +1141,7 @@
 
             let singer = $("[type=radio][name=radSinger]:checked").val();
 
-            if (singer == 'D') {
+            if (singer == 'D' || singer == 'C') {
                 $("#divPartnerRole").hide();
                 $('#divHideSolo').hide();
             } else if (! singer) {
@@ -1188,8 +1188,9 @@
                 if (tag == "D") {
                     continue;
                 }
-                if (tag.length < 2) {
+                if (tag != "C") {
                     // Some singer other than Dave sings this one
+                    // TODO: What about background vocals?
                     return false;
                 }
                 if (tag.charAt(1) != 'B') {
