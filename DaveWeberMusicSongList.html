@@ -1057,6 +1057,7 @@
                     // Special case: show all songs and hide filters
                     $('#divSingerFilters').hide();
                     $("#divDaveSoloSongsShown").show();
+                    $("#divHideSolo").show();
                     populateSongList(null, null, null, false);
                     setPartnerName();
                     selectedSinger = null;
@@ -1126,7 +1127,7 @@
                 titleText = 'Dave Weber Music Song List';
                 $('#title').text(titleText);
                 $('#divPartnerRole').hide();
-                $('#divHideSolo').hide();
+                // $('#divHideSolo').hide();
                 return;
             }
 
@@ -1193,6 +1194,7 @@
         }
 
         function populateSongList(tag, decade, partnerRole, hideSolo) {
+
             $("#ulSongs").empty();
 
             let byTitle = $("#chkByTitle").prop("checked");
@@ -1214,6 +1216,7 @@
 
                 if (!tag) {
                     let onlyDaveSings = doesOnlyDaveSing(tags);
+
                     if (! (onlyDaveSings && hideSolo)) {
                         if ((!decade) || (decade == songDecade)) {
                             if (!byTitle) {
@@ -1233,7 +1236,6 @@
                         }
                     }
                 } else {
-
                     if (! partnerRole) {
                         if (arrayContains(tags, tag) || arrayContains(tags, tag + "B")) {
                             if ((!decade) || (decade == songDecade)) {
@@ -1332,16 +1334,11 @@
 
             for (var i = 0; i < tags.length; i++) {
                 let tag = tags[i];
-                if (tag == "D") {
+
+                if (tag.length == 2 && tag.charAt(1) == 'B') {
                     continue;
                 }
-                if (tag != "C") {
-                    // Some singer other than Dave sings this one
-                    // TODO: What about background vocals?
-                    return false;
-                }
-                if (tag.charAt(1) != 'B') {
-                    // This shouldn't happen
+                if (tag != "D" && tag != "C") {
                     return false;
                 }
             }
