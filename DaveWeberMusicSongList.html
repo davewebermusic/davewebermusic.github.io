@@ -248,7 +248,7 @@
     <script>
 
         var gigs = [   
-            { gigDate: "04/12/2026", singer: "T", noTip: false, venue: "Dave's House" },             
+            { gigDate: "04/13/2026", singer: "T", noTip: false, venue: "Dave's House" },             
             { gigDate: "04/16/2026", singer: "T", noTip: false, venue: "Mount Vernon Country Club" },
             { gigDate: "04/17/2026", singer: "S", noTip: false, venue: "Gentleman Jim's" },
             { gigDate: "04/18/2026", singer: "T", noTip: false, venue: "Olney Station" },
@@ -962,10 +962,16 @@
                 $('input[type=radio][name=radSinger]').prop("checked", false);
                 $("#selDecade").val("");
                 $("#selPartnerRole").val("");
-                populateSongList(null, null, null, false);
+                populateSongList(null, null, null, $("#chkHideSolo").prop("checked"));
                 setPartnerName();
                 $("#divShowEverything").hide();
-                $("#divDaveSoloSongsShown").show();
+                if ($("#chkHideSolo").prop("checked")) {
+                    $("#divDaveSoloSongsShown").hide();
+                } else 
+                {
+                    $("#divDaveSoloSongsShown").show();
+                }
+
                 $("#divHideSolo").show();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 allSongsModal.show();
@@ -1018,6 +1024,11 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
+            let hideSoloParam = getUrlParameter('hideSolo');
+            if (hideSoloParam == 'Y' || hideSoloParam == 'y') {
+                $('#chkHideSolo').prop('checked', true);
+            }
+
             let selectedSinger = getUrlParameter('singer');
 
             if (selectedSinger) {
@@ -1032,9 +1043,16 @@
                 if (selectedSinger == 'ALL') {
                     // Special case: show all songs and hide filters
                     $('#divSingerFilters').hide();
-                    $("#divDaveSoloSongsShown").show();
                     $("#divHideSolo").show();
-                    populateSongList(null, null, null, false);
+
+                    if (hideSoloParam == 'Y' || hideSoloParam == 'y') {
+                        $("#divDaveSoloSongsShown").hide();
+                        populateSongList(null, null, null, true);  
+                    } else {
+                        $("#divDaveSoloSongsShown").show();
+                        populateSongList(null, null, null, false);  
+                    }
+
                     setPartnerName();
                     selectedSinger = null;
                 } else if (selectedSinger == 'LIST') {
