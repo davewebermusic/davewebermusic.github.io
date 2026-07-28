@@ -252,11 +252,7 @@
 
         var gigs = [               
         
-            { gigDate: "07/23/2026", singer: "A", noTip: false, venue: "Restaurant 198" },
-            { gigDate: "07/24/2026", singer: "A", noTip: false, venue: "Java Nation N. Bethesda" },
-            { gigDate: "07/25/2026", singer: "D", noTip: false, venue: "Kevin's Party" },
-            { gigDate: "07/26/2026", singer: "S", noTip: false, venue: "The Comus Inn" },
-            { gigDate: "07/30/2026", singer: "D", noTip: false, venue: "The Grove Potomac" },
+            { gigDate: "07/30/2026", singer: "K", noTip: false, venue: "The Grove Potomac" },
             { gigDate: "07/31/2026", singer: "R", noTip: false, venue: "Silo Falls" },
         
             { gigDate: "08/01/2026", singer: "D", noTip: false, venue: "Java Nation (Silver Spring)" },
@@ -1131,6 +1127,10 @@
                     $("#selPartnerRole").val("");
                     $('#divPartnerRole').hide();
                     $('#divHideSolo').hide();
+                    break;
+                case 'K':
+                    titleText = 'Dave & Kate Song List';
+                    filterByRoleText = "Filter by Kate's role";
                     break;
                 case 'I':
                     titleText = 'Dave & Arielle Song List';
