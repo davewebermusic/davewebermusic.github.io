@@ -1335,7 +1335,7 @@
                 let tagsCsv = songs[index].tags;
                 let tags = tagsCsv.split(',');
 
-                if (arrayContains(tags, 'D') && (! arrayContains(tags, "BB"))) {
+                if (arrayContains(tags, 'D') && (!arrayContains(tags, "B")) && (! arrayContains(tags, "BB"))) {
                     $("#ulSongs").append("<li>" + title + " -- <em>" + artist + "</em></li>");
                 } 
 
