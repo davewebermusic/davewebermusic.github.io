@@ -1033,6 +1033,10 @@
                     // Ignore whether there is a gig today. Always show all the singers
                     selectedSinger = null;
                     $("#divShowEverything").show();
+                } else if (selectedSinger == 'DaveNoTambo') {
+                    daveNoTamboSongList();  
+                } else if (selectedSinger == 'FemaleLead') {
+                    femaleLeadSongList();  
                 }
             }
             else {
@@ -1160,6 +1164,10 @@
                     titleText = 'Marissa & Dave Song List';
                     filterByRoleText = "Filter by Marissa's role";
                     break;
+                default:
+                    $('#divPartnerRole').hide();
+                    $('#divHideSolo').hide();
+
             }
             $('#title').text(titleText);
             $('#spanFilterbyPartnerRoleText').text(filterByRoleText);
@@ -1312,6 +1320,59 @@
 
             });
 
+        }
+
+        // This is for internal use. Songs that Dave knows  that Tambo doesn't
+        function daveNoTamboSongList() {
+
+            $("#ulSongs").empty();
+
+            songs.sort((a, b) => (toSortStr(a.title) + '  ' + toSortStr(a.artist) > toSortStr(b.title) + '  ' + toSortStr(b.artist)) ? 1 : -1)
+
+            songs.forEach((num, index) => {
+                let title = songs[index].title;
+                let artist = songs[index].artist;
+                let tagsCsv = songs[index].tags;
+                let tags = tagsCsv.split(',');
+
+                if (arrayContains(tags, 'D') && (! arrayContains(tags, "BB"))) {
+                    $("#ulSongs").append("<li>" + title + " -- <em>" + artist + "</em></li>");
+                } 
+
+            });
+
+            $("#divHideSolo").hide();
+            $("#divInstructions").hide();
+            $("#divDecade").hide();
+            $("#divSort").hide();
+            $("#divPartnerRole").hide();
+        }
+
+        function femaleLeadSongList() {
+
+            $("#ulSongs").empty();
+
+            songs.sort((a, b) => (toSortStr(a.title) + '  ' + toSortStr(a.artist) > toSortStr(b.title) + '  ' + toSortStr(b.artist)) ? 1 : -1)
+
+            songs.forEach((num, index) => {
+                let title = songs[index].title;
+                let artist = songs[index].artist;
+                let tagsCsv = songs[index].tags;
+                let tags = tagsCsv.split(',');
+
+                let titleAnchorTag = "<a href='mailto:DaveWeberMusic@gmail.com?subject=Song%20request:%20" + encodeURIComponent(title).replace(/'/g, "%27") + "&body=Please%20play%20" + encodeURIComponent(title).replace(/'/g, "%27") + "%20by%20" + encodeURIComponent(artist).replace(/'/g, "%27") + ".'>" + title + "</a>";
+
+                if ((! arrayContains(tags, 'D')) && (! arrayContains(tags, "C"))) {
+                    $("#ulSongs").append("<li>" + title + " -- <em>" + artist + "</em></li>");
+                } 
+
+            });
+
+            $("#divHideSolo").hide();
+            $("#divInstructions").hide();
+            $("#divDecade").hide();
+            $("#divSort").hide();
+            $("#divPartnerRole").hide();
         }
 
         function doesOnlyDaveSing(tags) {
